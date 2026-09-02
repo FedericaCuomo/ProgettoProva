@@ -1,0 +1,21 @@
+<ngx-sirio-card [isDark]="true">
+  <ngx-sirio-card-body>
+    <ngx-sirio-card-title> Benvenuto, Mario</ngx-sirio-card-title>
+    <ngx-sirio-card-subtitle>
+      Accedi ai servizi INPS, consulta le tue pratuche e gestisci le tue prestazioni in un unico
+      posto.
+    </ngx-sirio-card-subtitle>
+  </ngx-sirio-card-body>
+  <div class="flex flex-row gap-5">
+    <ngx-sirio-input
+      placeholder="Cerca un servizio (es. NASpI, pensione, assegno unico...)"
+      name="name"
+      ariaLabel="input"
+    >
+    </ngx-sirio-input>
+    <ngx-sirio-button color="tertiary">
+      <span class="fas fa-search" aria-hidden="true"></span>
+      Cerca
+    </ngx-sirio-button>
+  </div>
+</ngx-sirio-card>
