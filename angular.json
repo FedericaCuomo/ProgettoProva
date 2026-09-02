@@ -30,10 +30,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/ngx-sirio-lib-20/source/assets/img/",
+                "output": "assets/img/"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-sirio-lib-20/source/styles.min.css"
             ]
           },
           "configurations": {

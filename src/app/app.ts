@@ -1,12 +1,11 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {} from 'ngx-sirio-lib-20';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], //Questo dice ad Angular di accettare i custom element di Sirio
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  imports: [],
 })
-export class App {
-  protected readonly title = signal('progettoProva');
-}
+export class App {}
