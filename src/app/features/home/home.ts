@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
-import { Hero } from './hero/hero';
-import { Services } from './services/services';
+import { Hero } from './components/hero/hero';
+import { Services } from './components/services/services';
 
 @Component({
   selector: 'app-home',
@@ -9,4 +8,10 @@ import { Services } from './services/services';
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {}
+export class Home {
+  search: string = '';
+
+  onSerach(value: string) {
+    this.search = value;
+  }
+}

@@ -1,0 +1,23 @@
+<div class="flex flex-col gap-3">
+  <div class="text-gray-500">ACCESSO RAPIDO</div>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+    @for (service of filteredService; track $index) {
+      <ngx-sirio-card class="flex flex-col p-5 gap-2">
+        <div
+          class="w-10 h-10 {{
+            colorBox(service.category)
+          }} rounded-lg flex items-center justify-center"
+        >
+          <div class="{{ service.icon }} {{ colorIcon(service.category) }}"></div>
+        </div>
+        <ngx-sirio-card-title>
+          {{ service.name }}
+        </ngx-sirio-card-title>
+
+        <ngx-sirio-card-subtitle>
+          {{ service.text }}
+        </ngx-sirio-card-subtitle>
+      </ngx-sirio-card>
+    }
+  </div>
+</div>

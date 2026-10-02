@@ -1,1 +1,4 @@
-<app-hero /> <app-services />
+<div class="flex h-full flex-col gap-3 bg-[#f7f9fb] p-3 px-5">
+  <app-hero (serach)="onSerach($event)" />
+  <app-services [serach]="search" />
+</div>

@@ -1,10 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-@import "sirio/css";
-@import "tailwindcss";
+@layer theme, base, sirio, utilities;
 
-body{
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f7f9fb;
+@import 'tailwindcss/theme.css' layer(theme);
+
+@import 'tailwindcss/preflight.css' layer(base);
+
+@import '../node_modules/ngx-sirio-lib-20/source/styles.min.css' layer(sirio);
+
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+html,
+body,
+app-root,
+app-layout {
+  display: block;
+  height: 100%;
 }

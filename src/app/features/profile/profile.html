@@ -1,0 +1,20 @@
+<div class="bg-[#f7f9fb] px-5 p-3 h-full">
+  <app-hero />
+  <div class="flex flex-col gap-3">
+    <app-user-card [user]="user()" />
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <app-card-profile
+        title="Dati anagrafici"
+        icon="fa-solid fa-user-gear"
+        [cardField]="datiAnagraficiFields"
+        [user]="user()"
+      />
+      <app-card-profile
+        title="Contatti e recapiti"
+        icon="fa-solid fa-address-book"
+        [cardField]="contattiFields"
+        [user]="user()"
+      />
+    </div>
+  </div>
+</div>

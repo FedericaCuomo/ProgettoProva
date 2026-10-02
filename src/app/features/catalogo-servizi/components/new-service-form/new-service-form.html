@@ -1,0 +1,54 @@
+<form
+  [formGroup]="reactiveForm"
+  class="fixed inset-0 bg-[#00173d] w-fit h-fit top-10 p-5 flex items-center justify-center flex-col rounded-lg text-white"
+  (ngSubmit)="onAddNewService()"
+>
+  <h3>Aggiungi nuovo servizio:</h3>
+  <div class="flex flex-col gap-3">
+    <ngx-sirio-select
+      formControlName="serviceIcon"
+      name="icon"
+      label="Seleziona icona*"
+      placeholder="Scegli una opzione"
+    >
+      <ngx-sirio-select-panel>
+        <ngx-sirio-select-option value="fa-brands fa-facebook-f">Facebook</ngx-sirio-select-option>
+        <ngx-sirio-select-option value="fa-brands fa-instagram">Instagram</ngx-sirio-select-option>
+        <ngx-sirio-select-option value="fa-brands fa-youtube">Youtube</ngx-sirio-select-option>
+      </ngx-sirio-select-panel>
+    </ngx-sirio-select>
+
+    <ngx-sirio-input
+      formControlName="serviceName"
+      name="name"
+      label="Nome servizio*"
+      placeholder="Nome servizio"
+    />
+    <ngx-sirio-input
+      formControlName="serviceText"
+      name="text"
+      label="Descrizione servizio*"
+      placeholder="Descrizione servizio"
+    />
+    <ngx-sirio-select
+      formControlName="serviceCategory"
+      name="category"
+      label="Seleziona categoria*"
+      placeholder="Scegli una opzione"
+    >
+      <ngx-sirio-select-panel>
+        <ngx-sirio-select-option value="lavoro">Lavoro</ngx-sirio-select-option>
+        <ngx-sirio-select-option value="famiglia">Famiglia</ngx-sirio-select-option>
+        <ngx-sirio-select-option value="pensione">Pensione</ngx-sirio-select-option>
+        <ngx-sirio-select-option value="invalidità">Invalidità</ngx-sirio-select-option>
+      </ngx-sirio-select-panel>
+    </ngx-sirio-select>
+    <div class="flex gap-3">
+      <ngx-sirio-button type="submit" color="primary"> Salva </ngx-sirio-button>
+      <ngx-sirio-button type="button" color="danger" (click)="onCancel()">
+        Annulla
+      </ngx-sirio-button>
+    </div>
+  </div>
+  <!-- <div class="text-red-700">{{ errore }}</div> -->
+</form>

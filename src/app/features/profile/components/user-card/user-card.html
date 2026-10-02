@@ -1,0 +1,23 @@
+<div
+  class="flex flex-wrap justify-center sm:justify-start items-center gap-3 bg-white w-full rounded-lg p-3"
+>
+  <img
+    class="h-20 w-20 rounded-full aspect-square object-cover border-2 border-black"
+    src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?cs=srgb"
+    alt="immagine profilo Mario Rossi"
+  />
+  <div>
+    <h2>{{ user.fullname }}</h2>
+    <div class="flex gap-3 flex-col sm:flex-row">
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="fa-solid fa-id-card"></div>
+        <div>CF:</div>
+        <span>{{ user.CF }}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="fa-solid fa-location-dot"></div>
+        <div>{{ user.city }}</div>
+      </div>
+    </div>
+  </div>
+</div>

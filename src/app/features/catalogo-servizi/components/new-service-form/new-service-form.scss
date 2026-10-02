@@ -1,0 +1,10 @@
+        
+:host ::ng-deep {
+  // Applica il bordo rosso solo ai campi input e select interni ai web component invalidi
+  ngx-sirio-input.ng-invalid.ng-touched input,
+  ngx-sirio-select.ng-invalid.ng-touched select,
+  ngx-sirio-select.ng-invalid.ng-touched [class*="select"] { 
+    border: 2px solid #ef4444 !important;
+    border-radius: 10px ;
+  }
+}

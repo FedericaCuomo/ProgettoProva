@@ -1,0 +1,21 @@
+@for (category of categories; track $index) {
+  <div
+    (click)="selectedCategory(category)"
+    [class.bg-blue-100]="activeCategory === category"
+    [class.text-blue-600]="activeCategory === category"
+    class="hidden sm:block p-1 rounded-lg capitalize cursor-pointer select-none"
+  >
+    {{ category }}
+  </div>
+}
+
+<select
+  class="block sm:hidden bg-white p-2 w-fit capitalize rounded-lg border-2 border-blue-500"
+  name="filtri"
+  id="filtri"
+  (change)="onChangeSelect($event)"
+>
+  @for (category of categories; track $index) {
+    <option class="capitalize" [value]="category">{{ category }}</option>
+  }
+</select>
