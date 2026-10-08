@@ -1,6 +1,6 @@
 <form
+  class="fixed inset-0 top-10 flex h-fit w-fit flex-col items-center justify-center rounded-lg bg-[#00173d] p-5 text-white"
   [formGroup]="reactiveForm"
-  class="fixed inset-0 bg-[#00173d] w-fit h-fit top-10 p-5 flex items-center justify-center flex-col rounded-lg text-white"
   (ngSubmit)="onAddNewService()"
 >
   <h3>Aggiungi nuovo servizio:</h3>
@@ -12,9 +12,15 @@
       placeholder="Scegli una opzione"
     >
       <ngx-sirio-select-panel>
-        <ngx-sirio-select-option value="fa-brands fa-facebook-f">Facebook</ngx-sirio-select-option>
-        <ngx-sirio-select-option value="fa-brands fa-instagram">Instagram</ngx-sirio-select-option>
-        <ngx-sirio-select-option value="fa-brands fa-youtube">Youtube</ngx-sirio-select-option>
+        <ngx-sirio-select-option value="fa-brands fa-facebook-f"
+          >Facebook</ngx-sirio-select-option
+        >
+        <ngx-sirio-select-option value="fa-brands fa-instagram"
+          >Instagram</ngx-sirio-select-option
+        >
+        <ngx-sirio-select-option value="fa-brands fa-youtube"
+          >Youtube</ngx-sirio-select-option
+        >
       </ngx-sirio-select-panel>
     </ngx-sirio-select>
 
@@ -38,9 +44,15 @@
     >
       <ngx-sirio-select-panel>
         <ngx-sirio-select-option value="lavoro">Lavoro</ngx-sirio-select-option>
-        <ngx-sirio-select-option value="famiglia">Famiglia</ngx-sirio-select-option>
-        <ngx-sirio-select-option value="pensione">Pensione</ngx-sirio-select-option>
-        <ngx-sirio-select-option value="invalidità">Invalidità</ngx-sirio-select-option>
+        <ngx-sirio-select-option value="famiglia"
+          >Famiglia</ngx-sirio-select-option
+        >
+        <ngx-sirio-select-option value="pensione"
+          >Pensione</ngx-sirio-select-option
+        >
+        <ngx-sirio-select-option value="invalidità"
+          >Invalidità</ngx-sirio-select-option
+        >
       </ngx-sirio-select-panel>
     </ngx-sirio-select>
     <div class="flex gap-3">

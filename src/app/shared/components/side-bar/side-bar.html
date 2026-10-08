@@ -1,74 +1,46 @@
 <div class="p-3">
-  <div class="flex self-start hidden sm:block">
+  <div class="hidden self-start sm:block">
     <div class="flex flex-col">
       @for (voice of menu; track voice.id) {
         <div
-          routerLink="{{ voice.name }}"
           routerLinkActive="bg-blue-100 border-l-blue-500 active"
-          class="p-2 group flex items-center gap-3 h-10 border-4 border-transparent hover:border-l-blue-500 hover:bg-blue-100 cursor-pointer"
+          class="group flex h-10 cursor-pointer items-center gap-3 border-4 border-transparent p-2 text-gray-500 hover:border-l-blue-500 hover:bg-blue-100"
+          [routerLink]="voice.name"
         >
           <span
-            class="{{
-              voice.icon
-            }} text-gray-500 group-hover:text-blue-600 group-[.active]:!text-blue-600 select-none"
+            class="text-gray-500 select-none group-hover:text-blue-600 group-[.active]:text-blue-600!"
+            [ngClass]="voice.icon"
           ></span>
+
           <a
-            class="group-hover:!text-blue-600 group-[.active]:!text-blue-600 capitalize select-none"
-            >{{ voice.name }}</a
+            class="text-gray-500 capitalize select-none group-hover:text-blue-600! group-[.active]:text-blue-600!"
           >
+            {{ voice.name }}
+          </a>
         </div>
       }
     </div>
   </div>
 
-  <div class="block sm:hidden relative">
+  <div class="relative block sm:hidden">
     <ngx-sirio-button
       class="relative"
-      (click)="openMenu = !openMenu"
       color="primary"
       icon="fas fa-bars"
-    ></ngx-sirio-button>
+      (click)="openMenu = !openMenu"
+    />
     @if (openMenu === true) {
-      <div class="flex flex-col gap-3 bg-white absolute z-50 rounded-lg p-3">
+      <div class="absolute z-50 flex flex-col gap-3 rounded-lg bg-white p-3">
         @for (voice of menu; track voice.id) {
           <a
             class="text-[20px] capitalize"
-            routerLink="{{ voice.name }}"
+            [routerLink]="voice.name"
             (click)="openMenu = false"
           >
             <span class="hover:text-blue-500"> {{ voice.name }} </span>
           </a>
         }
       </div>
-      <!-- <ngx-sirio-dropdown-panel class="bg-white flex flex-col absolute z-100 left-0 rounded-lg">
-        @for (voice of menu; track voice.id) {
-          <ngx-sirio-dropdown-option
-            class="w-fit"
-            (click)="openMenu = false"
-            routerLink="{{ voice.name }}"
-          >
-            <span class="capitalize">{{ voice.name }}</span>
-          </ngx-sirio-dropdown-option>
-        }
-      </ngx-sirio-dropdown-panel>
-    -->
     }
   </div>
-  <!-- 
-  <div class="block sm:hidden">
-    <ngx-sirio-dropdown title="dropdown" color="primary" [panelPosition]="'bottom-right'">
-      <ngx-sirio-dropdown-panel>
-        @for (voice of menu; track voice.id) {
-          <ngx-sirio-dropdown-option
-            class="capitalize"
-            routerLinkUrl="{{ voice.name }}"
-            routerLinkFragment="types"
-            [isLink]="true"
-          >
-            {{ voice.name }}
-          </ngx-sirio-dropdown-option>
-        }
-      </ngx-sirio-dropdown-panel>
-    </ngx-sirio-dropdown>
-  </div> -->
 </div>

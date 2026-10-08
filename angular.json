@@ -38,7 +38,7 @@
                 "output": "assets/img/"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {

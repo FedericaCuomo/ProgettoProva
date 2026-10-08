@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ListaServizi } from './components/lista-servizi/lista-servizi';
 import { Hero } from './components/hero/hero';
 import { Filter } from './components/filter/filter';
@@ -9,15 +9,22 @@ import { ServiziForniti } from '../../shared/services/servizi-forniti';
 import { ServicesType } from '../../types';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-catalogo-servizi',
-  imports: [Hero, ListaServizi, Filter, Search, SirioButtonComponent, NewServiceForm],
+  imports: [
+    Hero,
+    ListaServizi,
+    Filter,
+    Search,
+    SirioButtonComponent,
+    NewServiceForm,
+  ],
   templateUrl: './catalogo-servizi.html',
-  styleUrl: './catalogo-servizi.scss',
 })
 export class CatalogoServizi {
   private serviziService = inject(ServiziForniti);
 
-  selectedCategory: string = 'tutti';
+  selectedCategory = 'tutti';
   isOpen = false;
 
   onServizioAggiunto(servizio: ServicesType) {

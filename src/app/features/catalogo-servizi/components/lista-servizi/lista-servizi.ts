@@ -1,16 +1,17 @@
-import { Component, inject, Input } from '@angular/core';
-import { ServiziForniti } from '../../../../shared/services/servizi-forniti';
 import {
-  SirioCardComponent,
-  SirioCardTitleComponent,
-  SirioCardSubtitleComponent,
-  SirioTagComponent,
-} from 'ngx-sirio-lib-20';
+  Component,
+  inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { ServiziForniti } from '../../../../shared/services/servizi-forniti';
+import { SirioCardComponent } from 'ngx-sirio-lib-20';
+import { NgClass } from '@angular/common';
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-lista-servizi',
-  imports: [SirioCardComponent, SirioCardTitleComponent, SirioCardSubtitleComponent],
+  imports: [SirioCardComponent, NgClass],
   templateUrl: './lista-servizi.html',
-  styleUrl: './lista-servizi.scss',
 })
 export class ListaServizi {
   private serviziService = inject(ServiziForniti);
@@ -19,13 +20,13 @@ export class ListaServizi {
   colorBox = this.serviziService.getColorBox;
 
   // riceve come input questi dati da CatalogoServizi
-  @Input() selectedCategory: string = 'tutti';
+  @Input() selectedCategory = 'tutti';
 
   // metodo che gestisce i filtri
   get filteredServices() {
     if (!this.selectedCategory || this.selectedCategory === 'tutti') {
       return this.services();
     }
-    return this.services().filter((s) => s.category === this.selectedCategory);
+    return this.services().filter(s => s.category === this.selectedCategory);
   }
 }

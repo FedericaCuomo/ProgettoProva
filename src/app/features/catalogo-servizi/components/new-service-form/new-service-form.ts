@@ -1,4 +1,10 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   SirioInputComponent,
   SirioSelectComponent,
@@ -7,11 +13,17 @@ import {
   SirioButtonComponent,
 } from 'ngx-sirio-lib-20';
 import { ServicesType } from '../../../../types';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  Validators,
+} from '@angular/forms';
 import { ServiziForniti } from '../../../../shared/services/servizi-forniti';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-new-service-form',
   imports: [
     SirioInputComponent,
@@ -28,10 +40,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class NewServiceForm {
   private serviziF = inject(ServiziForniti);
   //mando l'evento del click del button annulla
-  @Output() cancel = new EventEmitter<void>();
+  @Output() cancelClick = new EventEmitter<void>();
   @Output() nuovoServizio = new EventEmitter<ServicesType>();
 
-  errore: string = '';
+  errore = '';
 
   reactiveForm: FormGroup = new FormGroup({
     serviceName: new FormControl(null, Validators.required),
@@ -42,7 +54,7 @@ export class NewServiceForm {
 
   //metodo annullamento form
   onCancel(): void {
-    this.cancel.emit();
+    this.cancelClick.emit();
   }
 
   onAddNewService() {

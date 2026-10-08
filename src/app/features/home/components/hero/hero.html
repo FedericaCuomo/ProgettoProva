@@ -2,11 +2,11 @@
   <ngx-sirio-card-body class="w-full p-0">
     <ngx-sirio-card-title> Benvenuto, Mario</ngx-sirio-card-title>
     <ngx-sirio-card-subtitle>
-      Accedi ai servizi INPS, consulta le tue pratuche e gestisci le tue prestazioni in un unico
-      posto.
+      Accedi ai servizi INPS, consulta le tue pratuche e gestisci le tue
+      prestazioni in un unico posto.
     </ngx-sirio-card-subtitle>
   </ngx-sirio-card-body>
-  <div class="w-full flex flex-col sm:flex-row gap-5 p-2">
+  <div class="flex w-full flex-col gap-5 p-2 sm:flex-row">
     <!-- (input) ='onSearch()'
      ogni volta che cambia l'input parte in metodo onSearch-->
     <ngx-sirio-input
@@ -15,12 +15,11 @@
       name="name"
       ariaLabel="input"
       [(ngModel)]="searchText"
-    >
-    </ngx-sirio-input>
+    />
 
     <!-- button con cerca + icona -->
     <ngx-sirio-button
-      class="hidden sm:block bg-white rounded-lg"
+      class="hidden rounded-lg bg-white sm:block"
       color="tertiary"
       (click)="onSearch()"
     >
@@ -30,7 +29,7 @@
 
     <!-- button solo icona -->
     <ngx-sirio-button
-      class="block sm:hidden bg-white rounded-lg"
+      class="block rounded-lg bg-white sm:hidden"
       color="tertiary"
       (click)="onSearch()"
     >

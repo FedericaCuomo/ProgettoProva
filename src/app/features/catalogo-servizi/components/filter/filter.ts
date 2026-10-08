@@ -1,16 +1,17 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { ServiziForniti } from '../../../../shared/services/servizi-forniti';
 import {
-  SirioButtonComponent,
-  SirioDropdownPanelComponent,
-  SirioDropdownOptionComponent,
-} from 'ngx-sirio-lib-20';
+  Component,
+  EventEmitter,
+  inject,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { ServiziForniti } from '../../../../shared/services/servizi-forniti';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-filter',
-  imports: [SirioButtonComponent, SirioDropdownPanelComponent, SirioDropdownOptionComponent],
+  imports: [],
   templateUrl: './filter.html',
-  styleUrl: './filter.scss',
 })
 export class Filter {
   // inietto i services
@@ -21,8 +22,8 @@ export class Filter {
   @Output() categorySelected = new EventEmitter();
 
   // per identificare la categoria attiva in quel momento
-  activeCategory: string = 'tutti';
-  select: string = '';
+  activeCategory = 'tutti';
+  select = '';
 
   // categorie da stampare
   categories = ['tutti', 'lavoro', 'famiglia', 'pensione', 'invalidità'];

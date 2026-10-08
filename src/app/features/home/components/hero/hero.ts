@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   SirioCardComponent,
@@ -10,6 +15,7 @@ import {
 } from 'ngx-sirio-lib-20';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-hero',
   imports: [
     FormsModule,
@@ -21,10 +27,9 @@ import {
     SirioButtonComponent,
   ],
   templateUrl: './hero.html',
-  styleUrl: './hero.scss',
 })
 export class Hero {
-  searchText: string = '';
+  searchText = '';
   @Output() serach = new EventEmitter<string>();
 
   onSearch() {

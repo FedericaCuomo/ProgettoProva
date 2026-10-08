@@ -2,13 +2,13 @@
   <div class="text-gray-500">ACCESSO RAPIDO</div>
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
     @for (service of filteredService; track $index) {
-      <ngx-sirio-card class="flex flex-col p-5 gap-2">
+      <ngx-sirio-card class="flex flex-col gap-2 p-5">
+        <!-- le classi dinamiche le specifico con ngClass -->
         <div
-          class="w-10 h-10 {{
-            colorBox(service.category)
-          }} rounded-lg flex items-center justify-center"
+          class="flex h-10 w-10 items-center justify-center rounded-lg"
+          [ngClass]="colorBox(service.category)"
         >
-          <div class="{{ service.icon }} {{ colorIcon(service.category) }}"></div>
+          <div [ngClass]="[service.icon, colorIcon(service.category)]"></div>
         </div>
         <ngx-sirio-card-title>
           {{ service.name }}

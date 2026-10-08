@@ -1,18 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CardField, UserType } from '../../../../types';
-import { SirioInputComponent, SirioButtonComponent } from 'ngx-sirio-lib-20';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { NgClass } from '@angular/common';
+import { EditProfile } from '../edit-profile/edit-profile';
 @Component({
   selector: 'app-card-profile',
-  imports: [
-    SirioInputComponent,
-    SirioButtonComponent,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [FormsModule, ReactiveFormsModule, NgClass, EditProfile],
   templateUrl: './card-profile.html',
-  styleUrl: './card-profile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardProfileComponent {
@@ -26,6 +20,8 @@ export class CardProfileComponent {
   onEdit() {
     this.isEditing = true;
   }
-  // creo un formGroup vuoto
-  // formDati: FormGroup = new FormGroup({});
+
+  closeEdit() {
+    this.isEditing = false;
+  }
 }
