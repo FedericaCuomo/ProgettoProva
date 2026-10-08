@@ -5,14 +5,19 @@ import {
   EventEmitter,
   Input,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SirioInputComponent, SirioButtonComponent } from 'ngx-sirio-lib-20';
 import { CardField } from '../../../../types';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-edit-profile',
-  imports: [SirioInputComponent, FormsModule, SirioButtonComponent],
+  imports: [
+    SirioInputComponent,
+    FormsModule,
+    SirioButtonComponent,
+    ReactiveFormsModule,
+  ],
   templateUrl: './edit-profile.html',
 })
 export class EditProfile {
