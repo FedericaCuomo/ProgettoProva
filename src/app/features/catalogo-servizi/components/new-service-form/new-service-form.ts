@@ -12,6 +12,10 @@ import {
   SirioSelectOptionComponent,
   SirioButtonComponent,
   SirioValidationDirective,
+  SirioDialogBodyComponent,
+  SirioDialogHeaderComponent,
+  SirioDialogFooterComponent,
+  SirioDialogActionDirective,
 } from 'ngx-sirio-lib-20';
 import { ServicesType } from '../../../../types';
 import {
@@ -35,6 +39,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     SirioValidationDirective,
+    SirioDialogBodyComponent,
+    SirioDialogHeaderComponent,
+    SirioDialogFooterComponent,
+    SirioDialogActionDirective,
   ],
   templateUrl: './new-service-form.html',
   styleUrl: './new-service-form.scss',
@@ -44,8 +52,6 @@ export class NewServiceForm {
   //mando l'evento del click del button annulla
   @Output() cancelClick = new EventEmitter<void>();
   @Output() nuovoServizio = new EventEmitter<ServicesType>();
-
-  errore = '';
 
   reactiveForm: FormGroup = new FormGroup({
     serviceName: new FormControl(null, Validators.required),
@@ -61,9 +67,7 @@ export class NewServiceForm {
 
   onAddNewService() {
     this.reactiveForm.markAllAsTouched();
-    if (this.reactiveForm.invalid) {
-      this.errore = 'Compila tutti i campi obblicatori';
-    } else {
+    if (this.reactiveForm.valid) {
       const formValues = this.reactiveForm.value;
 
       const newService: ServicesType = {

@@ -7,3 +7,30 @@
 //     border-radius: 10px ;
 //   }
 // }
+
+// colora tutte le label all'interno del form
+:host ::ng-deep {
+  ngx-sirio-input label,
+  ngx-sirio-select label {
+    color: #ffffff;
+  }
+}
+
+// l'host sarebbe il tag di angular <app-new-service-form> fixed inset-0: Dice a questo tag di "incollarsi" allo schermo e occuparlo tutto, da cima a fondo e da sinistra a destra.
+:host {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+:host ::ng-deep {
+  ngx-sirio-button {
+    button,
+    .sirio-button {
+      width: 100% !important;
+    }
+  }
+}

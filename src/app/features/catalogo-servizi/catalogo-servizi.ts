@@ -7,6 +7,7 @@ import { SirioButtonComponent } from 'ngx-sirio-lib-20';
 import { NewServiceForm } from './components/new-service-form/new-service-form';
 import { ServiziForniti } from '../../shared/services/servizi-forniti';
 import { ServicesType } from '../../types';
+import { AddServiceForm } from './components/add-service-form/add-service-form';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +19,7 @@ import { ServicesType } from '../../types';
     Search,
     SirioButtonComponent,
     NewServiceForm,
+    AddServiceForm,
   ],
   templateUrl: './catalogo-servizi.html',
 })
