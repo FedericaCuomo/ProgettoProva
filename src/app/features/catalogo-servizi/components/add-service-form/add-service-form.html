@@ -1,79 +1,108 @@
-<ngx-sirio-dialog (closeEvent)="closeEvent()">
+<ngx-sirio-dialog [size]="'lg'" (closeEvent)="closeEvent()">
   <ngx-sirio-dialog-header>
     <ngx-sirio-dialog-title>
       Aggiungi un nuovo servizio:
     </ngx-sirio-dialog-title>
   </ngx-sirio-dialog-header>
   <ngx-sirio-dialog-body>
-    <form class="flex flex-col gap-5 py-2" [formGroup]="reactiveForm"></form>
-    <div>
-      <ngx-sirio-select
-        formControlName="serviceIcon"
-        name="icon"
-        label="Seleziona icona*"
-        placeholder="Scegli una opzione"
-        validation
-        [canValidate]="reactiveForm.get('serviceName')?.touched ?? false"
-        [showWhenValid]="true"
-      >
-        <ngx-sirio-select-panel>
-          <ngx-sirio-select-option value="fa-brands fa-facebook-f"
-            >Facebook</ngx-sirio-select-option
-          >
-          <ngx-sirio-select-option value="fa-brands fa-instagram"
-            >Instagram</ngx-sirio-select-option
-          >
-          <ngx-sirio-select-option value="fa-brands fa-youtube"
-            >Youtube</ngx-sirio-select-option
-          >
-        </ngx-sirio-select-panel>
-      </ngx-sirio-select>
-    </div>
-    <ngx-sirio-input
-      formControlName="serviceName"
-      name="name"
-      label="Nome servizio*"
-      placeholder="Nome servizio"
-      validation
-      [canValidate]="reactiveForm.get('serviceName')?.touched ?? false"
-      [showWhenValid]="true"
-      [textFeedback]="
-        reactiveForm.get('serviceName')?.invalid ? 'Il nome è obbligatorio' : ''
-      "
-    />
+    <form class="flex flex-col gap-5 py-2" [formGroup]="reactiveForm">
+      <div class="flex flex-col gap-5 sm:flex-row">
+        <ngx-sirio-select
+          class="flex-1"
+          formControlName="serviceIcon"
+          name="icon"
+          label="Seleziona icona*"
+          placeholder="Scegli una opzione"
+          validation
+          [canValidate]="reactiveForm.get('serviceIcon')?.touched ?? false"
+          [showWhenValid]="true"
+          [textFeedback]="
+            reactiveForm.get('serviceIcon')?.invalid ?
+              `L'icona è obbligatoria`
+            : ''
+          "
+        >
+          <ngx-sirio-select-panel>
+            <ngx-sirio-select-option value="fa-brands fa-facebook-f"
+              >Facebook</ngx-sirio-select-option
+            >
+            <ngx-sirio-select-option value="fa-brands fa-instagram"
+              >Instagram</ngx-sirio-select-option
+            >
+            <ngx-sirio-select-option value="fa-brands fa-youtube"
+              >Youtube</ngx-sirio-select-option
+            >
+          </ngx-sirio-select-panel>
+        </ngx-sirio-select>
 
-    <div class="flex flex-col gap-5 sm:flex-row">
-      <!-- Descrizione -->
-      <ngx-sirio-input
-        formControlName="serviceText"
-        name="text"
-        label="Descrizione servizio*"
-        placeholder="Descrizione servizio"
-      />
+        <ngx-sirio-input
+          class="flex-1"
+          formControlName="serviceName"
+          name="name"
+          label="Nome servizio*"
+          placeholder="Nome servizio"
+          validation
+          [canValidate]="reactiveForm.get('serviceName')?.touched ?? false"
+          [showWhenValid]="true"
+          [textFeedback]="
+            reactiveForm.get('serviceName')?.invalid ?
+              'Il nome è obbligatorio'
+            : ''
+          "
+        />
+      </div>
 
-      <!-- Categoria -->
-      <ngx-sirio-select
-        formControlName="serviceCategory"
-        name="category"
-        label="Seleziona categoria*"
-        placeholder="Scegli una opzione"
-      >
-        <ngx-sirio-select-panel>
-          <ngx-sirio-select-option value="lavoro"
-            >Lavoro</ngx-sirio-select-option
-          >
-          <ngx-sirio-select-option value="famiglia"
-            >Famiglia</ngx-sirio-select-option
-          >
-          <ngx-sirio-select-option value="pensione"
-            >Pensione</ngx-sirio-select-option
-          >
-          <ngx-sirio-select-option value="invalidità"
-            >Invalidità</ngx-sirio-select-option
-          >
-        </ngx-sirio-select-panel>
-      </ngx-sirio-select>
-    </div>
+      <div class="flex flex-col gap-5 sm:flex-row">
+        <!-- Descrizione -->
+        <ngx-sirio-input
+          class="flex-1"
+          formControlName="serviceText"
+          name="text"
+          label="Descrizione servizio*"
+          placeholder="Descrizione servizio"
+          validation
+          [canValidate]="reactiveForm.get('serviceText')?.touched ?? false"
+          [showWhenValid]="true"
+          [textFeedback]="
+            reactiveForm.get('serviceText')?.invalid ?
+              'La descrizione è obbligatoria'
+            : ''
+          "
+        />
+
+        <!-- Categoria -->
+        <ngx-sirio-select
+          class="flex-1"
+          formControlName="serviceCategory"
+          name="category"
+          label="Seleziona categoria*"
+          placeholder="Scegli una opzione"
+          validation
+          [canValidate]="reactiveForm.get('serviceCategory')?.touched ?? false"
+          [showWhenValid]="true"
+          [textFeedback]="
+            reactiveForm.get('serviceCategory')?.invalid ?
+              'La categoria è obbligatoria'
+            : ''
+          "
+        >
+          <ngx-sirio-select-panel>
+            <ngx-sirio-select-option value="lavoro"
+              >Lavoro</ngx-sirio-select-option
+            >
+            <ngx-sirio-select-option value="famiglia"
+              >Famiglia</ngx-sirio-select-option
+            >
+            <ngx-sirio-select-option value="pensione"
+              >Pensione</ngx-sirio-select-option
+            >
+            <ngx-sirio-select-option value="invalidità"
+              >Invalidità</ngx-sirio-select-option
+            >
+          </ngx-sirio-select-panel>
+        </ngx-sirio-select>
+      </div>
+    </form>
   </ngx-sirio-dialog-body>
 
   <ngx-sirio-dialog-footer>

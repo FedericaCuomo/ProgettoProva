@@ -44,6 +44,8 @@ import {
   templateUrl: './add-service-form.html',
   styleUrl: './add-service-form.scss',
 })
+
+// estendendo la classe si ottiene l'accesso a strumenti gestiti internamente dalla libreria
 export class AddServiceForm extends SirioDialogElement {
   reactiveForm: FormGroup = new FormGroup({
     serviceName: new FormControl(null, Validators.required),

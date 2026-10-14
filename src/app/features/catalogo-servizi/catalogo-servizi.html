@@ -1,7 +1,7 @@
 <div class="flex min-h-full flex-col gap-3 bg-[#f7f9fb] p-2 px-5 pb-20">
   <div class="flex items-center justify-between">
     <app-hero />
-    <ngx-sirio-button color="primary" (click)="isOpen = !isOpen">
+    <ngx-sirio-button color="primary" (clickEvent)="openAddDialog()">
       <span class="hidden sm:block">Aggiungi servizio</span>
       <span class="block sm:hidden">+</span>
     </ngx-sirio-button>
@@ -12,12 +12,4 @@
   />
   <app-search />
   <app-lista-servizi [selectedCategory]="selectedCategory" />
-
-  <app-add-service-form />
-  <!-- @if (isOpen === true) {
-    <app-new-service-form
-      (cancelClick)="isOpen = false"
-      (nuovoServizio)="onServizioAggiunto($event)"
-    />
-  } -->
 </div>
