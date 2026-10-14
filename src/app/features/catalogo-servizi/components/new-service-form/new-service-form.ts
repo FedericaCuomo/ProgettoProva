@@ -12,10 +12,6 @@ import {
   SirioSelectOptionComponent,
   SirioButtonComponent,
   SirioValidationDirective,
-  SirioDialogBodyComponent,
-  SirioDialogHeaderComponent,
-  SirioDialogFooterComponent,
-  SirioDialogActionDirective,
 } from 'ngx-sirio-lib-20';
 import { ServicesType } from '../../../../types';
 import {
@@ -39,10 +35,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     SirioValidationDirective,
-    SirioDialogBodyComponent,
-    SirioDialogHeaderComponent,
-    SirioDialogFooterComponent,
-    SirioDialogActionDirective,
   ],
   templateUrl: './new-service-form.html',
   styleUrl: './new-service-form.scss',

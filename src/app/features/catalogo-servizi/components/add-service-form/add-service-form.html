@@ -109,7 +109,13 @@
     <ngx-sirio-button ngxDialogAction actionType="close" color="secondary">
       Annulla
     </ngx-sirio-button>
-    <ngx-sirio-button ngxDialogAction actionType="confirm" color="primary">
+    <ngx-sirio-button
+      ngxDialogAction
+      actionType="confirm"
+      color="primary"
+      [disabled]="reactiveForm.invalid"
+      (confirmEvent)="onConfirm()"
+    >
       Salva
     </ngx-sirio-button>
   </ngx-sirio-dialog-footer>

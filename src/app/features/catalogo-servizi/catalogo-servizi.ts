@@ -21,9 +21,9 @@ export class CatalogoServizi {
   selectedCategory = 'tutti';
   isOpen = false;
 
-  onServizioAggiunto(servizio: ServicesType) {
-    this.serviziService.addService(servizio);
-  }
+  // onServizioAggiunto(servizio: ServicesType) {
+  //   this.serviziService.addService(servizio);
+  // }
 
   // metodo che gestisce il cambiamento della categoria
   onCategoryChange(category: string) {
@@ -31,12 +31,20 @@ export class CatalogoServizi {
   }
 
   openAddDialog() {
-    this.dialogService.openDialog(AddServiceForm);
-    /*.afterClosed() 
+    this.dialogService
+      .openDialog(AddServiceForm)
+      .afterClosed()
       .subscribe(data => {
         if (data) {
-          console.log('dati ricevuti dal form: ', data);
+          const nuovoServizio: ServicesType = {
+            name: data.serviceName,
+            icon: data.serviceIcon,
+            text: data.serviceText,
+            category: data.serviceCategory,
+          };
+
+          this.serviziService.addService(nuovoServizio);
         }
-      });*/
+      });
   }
 }
