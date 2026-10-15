@@ -61,7 +61,7 @@ export class AddServiceForm extends SirioDialogElement {
 
   // Gestisce il click sul tasto Salva/Conferma
   onConfirm() {
-    this.reactiveForm.markAllAsTouched();
+    // this.reactiveForm.markAllAsTouched();
     if (this.reactiveForm.invalid) {
       return;
     }
