@@ -1,0 +1,26 @@
+<ngx-sirio-dialog [size]="'lg'" (closeEvent)="closeEvent()">
+  <ngx-sirio-dialog-header>
+    <ngx-sirio-dialog-title>
+      Modifica {{ profileData.title }}
+    </ngx-sirio-dialog-title>
+  </ngx-sirio-dialog-header>
+  <ngx-sirio-dialog-body>
+    <form class="flex flex-col gap-4">
+      @for (field of profileData.cardFields; track field.key) {
+        <ngx-sirio-input
+          [placeholder]="'Inserisci ' + field.label"
+          [label]="field.label"
+          [value]="profileData.user[field.key]"
+        />
+      }
+    </form>
+  </ngx-sirio-dialog-body>
+  <ngx-sirio-dialog-footer>
+    <ngx-sirio-button ngxDialogAction actionType="close" color="secondary">
+      Annulla
+    </ngx-sirio-button>
+    <ngx-sirio-button ngxDialogAction actionType="confirm" color="primary">
+      Salva
+    </ngx-sirio-button>
+  </ngx-sirio-dialog-footer>
+</ngx-sirio-dialog>

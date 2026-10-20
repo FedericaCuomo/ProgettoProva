@@ -1,27 +1,36 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  Input,
+} from '@angular/core';
 import { CardField, UserType } from '../../../../types';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { EditProfile } from '../edit-profile/edit-profile';
+import { SirioDialogService } from 'ngx-sirio-lib-20';
+import { EditProfileDialog } from '../edit-form-profile/edit-form-profile';
 @Component({
   selector: 'app-card-profile',
-  imports: [FormsModule, ReactiveFormsModule, NgClass, EditProfile],
+  imports: [FormsModule, ReactiveFormsModule, NgClass],
   templateUrl: './card-profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardProfileComponent {
-  @Input({ required: true }) user!: UserType;
+  user = input<UserType>();
+  // @Input({ required: true }) user!: UserType;
   @Input({ required: true }) title!: string;
   @Input({ required: true }) icon!: string;
   @Input({ required: true }) cardField!: CardField[];
-
-  isEditing = false;
+  private dialogService = inject(SirioDialogService);
 
   onEdit() {
-    this.isEditing = true;
-  }
-
-  closeEdit() {
-    this.isEditing = false;
+    this.dialogService
+      .openDialog(EditProfileDialog, {
+        user: this.user(),
+        cardFields: this.cardField,
+        title: this.title,
+      })
+      .afterClosed();
   }
 }

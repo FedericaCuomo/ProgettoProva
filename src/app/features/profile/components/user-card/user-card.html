@@ -1,23 +1,25 @@
 <div
-  class="flex flex-wrap justify-center sm:justify-start items-center gap-3 bg-white w-full rounded-lg p-3"
+  class="flex w-full flex-wrap items-center justify-center gap-3 rounded-lg bg-white p-3 sm:justify-start"
 >
   <img
-    class="h-20 w-20 rounded-full aspect-square object-cover border-2 border-black"
+    class="aspect-square h-20 w-20 rounded-full border-2 border-black object-cover"
     src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?cs=srgb"
     alt="immagine profilo Mario Rossi"
   />
   <div>
-    <h2>{{ user.fullname }}</h2>
-    <div class="flex gap-3 flex-col sm:flex-row">
-      <div class="flex flex-wrap items-center gap-2">
-        <div class="fa-solid fa-id-card"></div>
-        <div>CF:</div>
-        <span>{{ user.CF }}</span>
+    @if (user(); as userData) {
+      <h2>{{ userData.fullname }}</h2>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="fa-solid fa-id-card"></div>
+          <div>CF:</div>
+          <span>{{ userData.CF }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="fa-solid fa-location-dot"></div>
+          <div>{{ userData.city }}</div>
+        </div>
       </div>
-      <div class="flex items-center gap-2">
-        <div class="fa-solid fa-location-dot"></div>
-        <div>{{ user.city }}</div>
-      </div>
-    </div>
+    }
   </div>
 </div>

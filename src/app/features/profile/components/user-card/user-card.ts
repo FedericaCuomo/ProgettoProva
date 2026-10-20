@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { UserType } from '../../../../types';
 
 @Component({
@@ -8,5 +8,7 @@ import { UserType } from '../../../../types';
   templateUrl: './user-card.html',
 })
 export class UserCard {
-  @Input({ required: true }) user!: UserType;
+  // @Input({ required: true }) user!: UserType;
+  // input signal
+  user = input<UserType>();
 }

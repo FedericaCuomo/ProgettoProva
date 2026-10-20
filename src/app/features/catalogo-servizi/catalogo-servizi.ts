@@ -34,13 +34,13 @@ export class CatalogoServizi {
     this.dialogService
       .openDialog(AddServiceForm)
       .afterClosed()
-      .subscribe(data => {
-        if (data) {
+      .subscribe(servizio => {
+        if (servizio) {
           const nuovoServizio: ServicesType = {
-            name: data.serviceName,
-            icon: data.serviceIcon,
-            text: data.serviceText,
-            category: data.serviceCategory,
+            name: servizio.serviceName,
+            icon: servizio.serviceIcon,
+            text: servizio.serviceText,
+            category: servizio.serviceCategory,
           };
 
           this.serviziService.addService(nuovoServizio);

@@ -54,12 +54,12 @@ export class AddServiceForm extends SirioDialogElement {
     serviceCategory: new FormControl(null, Validators.required),
   });
 
-  // chiusura del form tramite x
+  // chiusura del form
   closeEvent() {
     this.sirioDialogService.closeDialog();
   }
 
-  // Gestisce il click sul tasto Salva/Conferma
+  // Gestisce Salva/Conferma
   onConfirm() {
     // this.reactiveForm.markAllAsTouched();
     if (this.reactiveForm.invalid) {

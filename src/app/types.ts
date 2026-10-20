@@ -22,7 +22,12 @@ export type UserType = {
   phone: string;
 };
 export type CardField = {
-  key: string;
+  key: keyof UserType;
   label: string;
-  value: string;
+};
+
+export type CardConfig = {
+  title: string;
+  icon: string;
+  fields: CardField[];
 };
