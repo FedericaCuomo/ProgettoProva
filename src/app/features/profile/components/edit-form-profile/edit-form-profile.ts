@@ -1,5 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ɵInternalFormsSharedModule } from '@angular/forms';
+import {
+  FormControl,
+  Validators,
+  ɵInternalFormsSharedModule,
+} from '@angular/forms';
 import {
   SirioDialogComponent,
   SirioDialogHeaderComponent,
@@ -9,7 +13,9 @@ import {
   SirioButtonComponent,
   SirioDialogElement,
   SirioInputComponent,
+  SirioValidationDirective,
 } from 'ngx-sirio-lib-20';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms'; // <-- 1. Importiamo i moduli dei Reactive Forms
 import { CardField, UserType } from '../../../../types';
 
 @Component({
@@ -24,10 +30,15 @@ import { CardField, UserType } from '../../../../types';
     ɵInternalFormsSharedModule,
     SirioDialogBodyComponent,
     SirioInputComponent,
+    ReactiveFormsModule,
+    SirioValidationDirective,
   ],
   templateUrl: './edit-form-profile.html',
 })
 export class EditProfileDialog extends SirioDialogElement {
+  form!: FormGroup;
+
+  // serve per prendere i dati dal padre - solo lettura
   get profileData() {
     return this.data as {
       user: UserType;
@@ -37,15 +48,33 @@ export class EditProfileDialog extends SirioDialogElement {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
+    const formControlsConfig: Record<string, FormControl<string | null>> = {};
+
+    this.profileData.cardFields.forEach(field => {
+      const currentValue = this.profileData.user[field.key] || '';
+      formControlsConfig[field.key] = new FormControl(currentValue, {
+        validators: [Validators.required],
+      });
+    });
+    this.form = new FormGroup(formControlsConfig);
   }
 
   closeEvent() {
     this.sirioDialogService.closeDialog();
   }
 
+  // afterClosed$$ è un emitter reattivo che serve a emettere un valore verso il componente che ha aperto il dialog
   onConfirm() {
-    this.afterClosed$$.next(this.data);
-    this.sirioDialogService.closeDialog();
+    this.form.markAllAsTouched();
+
+    if (this.form.valid) {
+      const updatedUserData = {
+        ...this.profileData.user,
+        ...this.form.value,
+      };
+
+      this.afterClosed$$.next(updatedUserData);
+      this.sirioDialogService.closeDialog();
+    }
   }
 }

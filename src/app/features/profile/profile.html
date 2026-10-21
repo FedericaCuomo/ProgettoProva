@@ -9,6 +9,7 @@
           [icon]="card.icon"
           [cardField]="card.fields"
           [user]="user()"
+          (userUpdated)="onUserUpdated($event)"
         />
 
         <!-- <app-card-profile

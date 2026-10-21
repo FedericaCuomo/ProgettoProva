@@ -4,6 +4,7 @@ import {
   inject,
   input,
   Input,
+  output,
 } from '@angular/core';
 import { CardField, UserType } from '../../../../types';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -17,12 +18,14 @@ import { EditProfileDialog } from '../edit-form-profile/edit-form-profile';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardProfileComponent {
-  user = input<UserType>();
   // @Input({ required: true }) user!: UserType;
+  user = input<UserType>();
   @Input({ required: true }) title!: string;
   @Input({ required: true }) icon!: string;
   @Input({ required: true }) cardField!: CardField[];
   private dialogService = inject(SirioDialogService);
+
+  userUpdated = output<UserType>();
 
   onEdit() {
     this.dialogService
@@ -31,6 +34,11 @@ export class CardProfileComponent {
         cardFields: this.cardField,
         title: this.title,
       })
-      .afterClosed();
+      .afterClosed()
+      .subscribe(result => {
+        if (result) {
+          this.userUpdated.emit(result);
+        }
+      });
   }
 }

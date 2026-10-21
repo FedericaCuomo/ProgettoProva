@@ -72,4 +72,8 @@ export class Profile {
   // onUpdateDati(nuoviDati: Partial<UserType>) {
   //   this.user.update(currentData => ({ ...currentData, ...nuoviDati }));
   // }
+
+  onUserUpdated(nuoviDatiUtente: UserType) {
+    this.user.set(nuoviDatiUtente);
+  }
 }

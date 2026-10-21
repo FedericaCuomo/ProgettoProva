@@ -5,12 +5,19 @@
     </ngx-sirio-dialog-title>
   </ngx-sirio-dialog-header>
   <ngx-sirio-dialog-body>
-    <form class="flex flex-col gap-4">
+    <form class="flex flex-col gap-4" [formGroup]="form">
       @for (field of profileData.cardFields; track field.key) {
         <ngx-sirio-input
+          validation
+          [formControlName]="field.key"
           [placeholder]="'Inserisci ' + field.label"
           [label]="field.label"
           [value]="profileData.user[field.key]"
+          [canValidate]="form.get(field.key)?.touched ?? false"
+          [showWhenValid]="true"
+          [textFeedback]="
+            form.get(field.key)?.invalid ? field.label + ' è obbligatorio' : ''
+          "
         />
       }
     </form>
@@ -19,7 +26,13 @@
     <ngx-sirio-button ngxDialogAction actionType="close" color="secondary">
       Annulla
     </ngx-sirio-button>
-    <ngx-sirio-button ngxDialogAction actionType="confirm" color="primary">
+    <ngx-sirio-button
+      ngxDialogAction
+      actionType="confirm"
+      color="primary"
+      [disabled]="form.invalid"
+      (clickEvent)="onConfirm()"
+    >
       Salva
     </ngx-sirio-button>
   </ngx-sirio-dialog-footer>
