@@ -23,7 +23,12 @@
     </form>
   </ngx-sirio-dialog-body>
   <ngx-sirio-dialog-footer>
-    <ngx-sirio-button ngxDialogAction actionType="close" color="secondary">
+    <ngx-sirio-button
+      ngxDialogAction
+      actionType="close"
+      color="secondary"
+      (clickEvent)="closeEvent()"
+    >
       Annulla
     </ngx-sirio-button>
     <ngx-sirio-button

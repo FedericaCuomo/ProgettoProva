@@ -9,6 +9,7 @@ import { UserType } from '../../../../types';
 })
 export class UserCard {
   // @Input({ required: true }) user!: UserType;
+
   // input signal
   user = input<UserType>();
 }

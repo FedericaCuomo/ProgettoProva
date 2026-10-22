@@ -36,9 +36,10 @@ import { CardField, UserType } from '../../../../types';
   templateUrl: './edit-form-profile.html',
 })
 export class EditProfileDialog extends SirioDialogElement {
+  // variabile di tipo FormGroup. inizializzata dopo
   form!: FormGroup;
 
-  // serve per prendere i dati dal padre - solo lettura
+  // serve per prendere i dati dal padre (cardProfile) - solo lettura e viene specificata la struttura di questi dati
   get profileData() {
     return this.data as {
       user: UserType;
@@ -47,15 +48,21 @@ export class EditProfileDialog extends SirioDialogElement {
     };
   }
 
+  // senza ngoninit i dati passati dal padre (this.profileData) potrebbero non essere ancora pronti
   ngOnInit(): void {
+    // serve per creare dinamicamente il formGroup.
+    // Record serve a definire la forma di un oggetto specificando che tipo di chiavi e valori conterrà
     const formControlsConfig: Record<string, FormControl<string | null>> = {};
 
+    // dai dati che entrano in input iteriamo sui campi della card e stampiamo il valore legato allo stesso campo dell'utente
     this.profileData.cardFields.forEach(field => {
       const currentValue = this.profileData.user[field.key] || '';
       formControlsConfig[field.key] = new FormControl(currentValue, {
         validators: [Validators.required],
       });
     });
+
+    // Angular crea automaticamente il form completo, collegando ogni input al suo rispettivo controllo, senza scrivere a mano il codice
     this.form = new FormGroup(formControlsConfig);
   }
 

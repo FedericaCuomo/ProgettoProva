@@ -18,15 +18,19 @@ import { EditProfileDialog } from '../edit-form-profile/edit-form-profile';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardProfileComponent {
+  // serve per utilizzare il service dei dialog in questo componente
+  private dialogService = inject(SirioDialogService);
+
   // @Input({ required: true }) user!: UserType;
   user = input<UserType>();
   @Input({ required: true }) title!: string;
   @Input({ required: true }) icon!: string;
   @Input({ required: true }) cardField!: CardField[];
-  private dialogService = inject(SirioDialogService);
 
   userUpdated = output<UserType>();
 
+  // passo al Dialog quei dati in ingresso.
+  // Subscribe - appena il popup viene chiuso, il codice dentro la parentesi viene eseguito e riceve una variabile chiamata result
   onEdit() {
     this.dialogService
       .openDialog(EditProfileDialog, {

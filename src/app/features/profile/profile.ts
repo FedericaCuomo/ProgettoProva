@@ -17,6 +17,7 @@ export class Profile {
     { key: 'address', label: 'Indirizzo di residenza' },
     { key: 'status', label: 'Stato civile' },
   ]);
+
   contattiFields = signal<CardField[]>([
     { key: 'mail', label: 'Email principale' },
     { key: 'phone', label: 'Numero di telefono' },
@@ -46,33 +47,7 @@ export class Profile {
     phone: '3336243038',
   });
 
-  // userList = signal<UserType[]>([
-  //   {
-  //     fullname: 'Mario Rossi',
-  //     date: '22/11/2000',
-  //     city: 'Torino',
-  //     address: 'corso Francia 79',
-  //     status: 'coniugato',
-  //     CF: 'CMUFRC00S62F839Y',
-  //     mail: 'mario.rossi@gmail.com',
-  //     phone: '3336243038',
-  //   },
-  //   {
-  //     fullname: 'Federica Cuomo',
-  //     date: '22/11/2000',
-  //     city: 'Napoli',
-  //     address: 'corso umberto',
-  //     status: 'coniugato',
-  //     CF: 'CMUFRC00S62F839Q',
-  //     mail: 'mario.rossi@gmail.com',
-  //     phone: '3336243038',
-  //   },
-  // ]);
-
-  // onUpdateDati(nuoviDati: Partial<UserType>) {
-  //   this.user.update(currentData => ({ ...currentData, ...nuoviDati }));
-  // }
-
+  // set si usa per sovrascrivere il valore con uno nuovo
   onUserUpdated(nuoviDatiUtente: UserType) {
     this.user.set(nuoviDatiUtente);
   }
