@@ -1,11 +1,21 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { SirioSearchbarComponent } from 'ngx-sirio-lib-20';
-import { FormsModule } from '@angular/forms';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { NgxSirioEvent, SirioSearchbarComponent } from 'ngx-sirio-lib-20';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-search',
-  imports: [SirioSearchbarComponent, FormsModule],
+  imports: [SirioSearchbarComponent],
   templateUrl: './search.html',
 })
-export class Search {}
+export class Search {
+  @Output() search = new EventEmitter<string>();
+
+  onSearch(event: NgxSirioEvent<SirioSearchbarComponent>) {
+    this.search.emit(event.data);
+  }
+}

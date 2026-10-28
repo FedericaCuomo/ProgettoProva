@@ -12,6 +12,7 @@
 
   <div class="flex flex-col gap-2">
     @if (user(); as userData) {
+      <!-- primo giro del ciclo for field=fullname e userData[field.key] cerca dentro l'utente il valore associato a quella chiave -->
       @for (field of cardField; track $index) {
         <div class="flex justify-between">
           <div class="text-gray-500">{{ field.label }}</div>

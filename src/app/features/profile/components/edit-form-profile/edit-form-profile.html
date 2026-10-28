@@ -14,7 +14,6 @@
           [label]="field.label"
           [value]="profileData.user[field.key]"
           [canValidate]="form.get(field.key)?.touched ?? false"
-          [showWhenValid]="true"
           [textFeedback]="
             form.get(field.key)?.invalid ? field.label + ' è obbligatorio' : ''
           "

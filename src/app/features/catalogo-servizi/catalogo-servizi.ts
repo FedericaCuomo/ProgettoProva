@@ -20,15 +20,16 @@ export class CatalogoServizi {
 
   selectedCategory = 'tutti';
   isOpen = false;
-
-  // onServizioAggiunto(servizio: ServicesType) {
-  //   this.serviziService.addService(servizio);
-  // }
+  // searchQuery = '';
 
   // metodo che gestisce il cambiamento della categoria
   onCategoryChange(category: string) {
     this.selectedCategory = category;
   }
+
+  // onSearchChange(query: string) {
+  //   this.searchQuery = query;
+  // }
 
   openAddDialog() {
     this.dialogService

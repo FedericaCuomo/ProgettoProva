@@ -47,7 +47,7 @@ export class Profile {
     phone: '3336243038',
   });
 
-  // set si usa per sovrascrivere il valore con uno nuovo
+  // set è un metodo dei signal e si usa per sovrascrivere il valore con uno nuovo
   onUserUpdated(nuoviDatiUtente: UserType) {
     this.user.set(nuoviDatiUtente);
   }

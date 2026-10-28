@@ -1,0 +1,52 @@
+<ngx-sirio-button (clickEvent)="onIncrement(value)">{{
+  value()
+}}</ngx-sirio-button>
+<ngx-sirio-button (clickEvent)="onIncrement(value2)">{{
+  value2()
+}}</ngx-sirio-button>
+<div>{{ onSum() }}</div>
+<ngx-sirio-expandable-container
+  hideOn="(max-width: 1200px)"
+  [containerAriaLabel]="'title'"
+>
+  <ngx-sirio-title-bar
+    [title]="'title'"
+    [subtitle]="'subtitle'"
+    [isDark]="true"
+  >
+    <ngx-sirio-title-bar-action [actionData]="'trigger'" />
+  </ngx-sirio-title-bar>
+
+  <ngx-sirio-table-container>
+    <table sirioTable [isDarkTheme]="true" [dataSource]="dataSource">
+      <caption class="sr-only">
+        Tabella esempio
+      </caption>
+      <ng-container sirioColumnDef="age">
+        <th *sirioHeaderCellDef sirioHeaderCell>Age</th>
+        <td *sirioCellDef="let element" sirioCell>
+          {{ element.age }}
+        </td>
+      </ng-container>
+
+      <ng-container sirioColumnDef="name">
+        <th *sirioHeaderCellDef sirioHeaderCell>Name</th>
+        <td *sirioCellDef="let element" sirioCell>
+          {{ element.name }}
+        </td>
+      </ng-container>
+      <ng-container sirioColumnDef="country">
+        <th *sirioHeaderCellDef sirioHeaderCell>Test</th>
+        <td *sirioCellDef="let element" sirioCell>
+          {{ element.country }}
+        </td>
+      </ng-container>
+
+      <tr *sirioHeaderRowDef="displayedColumns" sirioHeaderRow></tr>
+      <tr *sirioRowDef="let row; columns: displayedColumns" sirioRow></tr>
+      <tr *sirioNoDataRow class="text-center">
+        <td colspan="3">Ci dispiace non ci sono dati</td>
+      </tr>
+    </table>
+  </ngx-sirio-table-container>
+</ngx-sirio-expandable-container>

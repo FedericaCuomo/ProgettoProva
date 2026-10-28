@@ -21,6 +21,7 @@ export class ListaServizi {
 
   // riceve come input questi dati da CatalogoServizi
   @Input() selectedCategory = 'tutti';
+  // @Input() searchQuery = '';
 
   // metodo che gestisce i filtri
   get filteredServices() {
