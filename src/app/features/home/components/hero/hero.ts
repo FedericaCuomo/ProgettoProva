@@ -13,6 +13,7 @@ import {
   SirioInputComponent,
   SirioButtonComponent,
 } from 'ngx-sirio-lib-20';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +26,7 @@ import {
     SirioCardTitleComponent,
     SirioCardBodyComponent,
     SirioButtonComponent,
+    TranslatePipe,
   ],
   templateUrl: './hero.html',
 })

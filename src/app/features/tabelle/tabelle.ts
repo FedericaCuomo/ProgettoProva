@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { SirioInputComponent, SirioButtonComponent } from 'ngx-sirio-lib-20';
 import { AnagraficaForm } from './models/table.model';
-import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,16 +22,10 @@ import { TranslateService, TranslatePipe } from '@ngx-translate/core';
   styleUrl: './tabelle.scss',
 })
 export class Tabelle {
-  private translate = inject(TranslateService);
-
-  constructor() {
-    this.translate.addLangs(['it', 'en']);
-    // this.translate.use('en');
-  }
-
   searchForm = new FormGroup<AnagraficaForm>({
     name: new FormControl<string | null>('', [Validators.required]),
     surname: new FormControl<string | null>('', [Validators.required]),
+    date: new FormControl<string | null>('', [Validators.required]),
   });
 
   onSearch() {

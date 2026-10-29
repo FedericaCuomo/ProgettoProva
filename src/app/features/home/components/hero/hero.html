@@ -1,9 +1,11 @@
 <ngx-sirio-card class="items-center p-3" [isDark]="true">
   <ngx-sirio-card-body class="w-full p-0">
-    <ngx-sirio-card-title> Benvenuto, Mario</ngx-sirio-card-title>
+    <ngx-sirio-card-title>
+      {{ 'home-section.hero.heroTitle' | translate }},
+      Mario</ngx-sirio-card-title
+    >
     <ngx-sirio-card-subtitle>
-      Accedi ai servizi INPS, consulta le tue pratuche e gestisci le tue
-      prestazioni in un unico posto.
+      {{ 'home-section.hero.heroText' | translate }}
     </ngx-sirio-card-subtitle>
   </ngx-sirio-card-body>
   <div class="flex w-full flex-col gap-5 p-2 sm:flex-row">
@@ -11,9 +13,9 @@
      ogni volta che cambia l'input parte in metodo onSearch-->
     <ngx-sirio-input
       class="grow-2"
-      placeholder="Cerca un servizio (es. NASpI, pensione, assegno unico...)"
       name="name"
       ariaLabel="input"
+      [placeholder]="'home-section.hero.searchBar.placeholder' | translate"
       [(ngModel)]="searchText"
     />
 
@@ -24,7 +26,7 @@
       (click)="onSearch()"
     >
       <span class="fas fa-search" aria-hidden="true"></span>
-      Cerca
+      {{ 'home-section.hero.button.search' | translate }}
     </ngx-sirio-button>
 
     <!-- button solo icona -->

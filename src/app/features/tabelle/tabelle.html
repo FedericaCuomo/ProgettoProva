@@ -1,36 +1,46 @@
+<h1>{{ 'tabelle-section.title' | translate }}</h1>
 <div class="flex justify-center">
-  <div class="bg-blue-50 p-5">
+  <div class="rounded-2xl bg-blue-50 p-5">
     <form
       class="flex flex-col gap-5"
       [formGroup]="searchForm"
       (ngSubmit)="onSearch()"
     >
       <ngx-sirio-input
-        label="Nome"
-        placeholder="Inserisci nome"
         name="name"
         ariaLabel="input"
         formControlName="name"
         maxLength="10"
+        [placeholder]="'SHARED.form.name.placeholder' | translate"
+        [label]="'SHARED.form.name.label' | translate"
       />
       <ngx-sirio-input
-        label="Cognome"
-        placeholder="Inserisci cognome"
         name="surname"
         ariaLabel="input"
         formControlName="surname"
         maxLength="10"
+        [placeholder]="'SHARED.form.surname.placeholder' | translate"
+        [label]="'SHARED.form.surname.label' | translate"
       />
+      <ngx-sirio-input
+        name="surname"
+        ariaLabel="input"
+        formControlName="surname"
+        maxLength="10"
+        [placeholder]="'SHARED.form.date.placeholder' | translate"
+        [label]="'SHARED.form.date.label' | translate"
+      />
+
       <!-- clickEvent con le tonde perchè Output -->
       <div class="flex gap-5">
         <ngx-sirio-button type="submit" color="primary">{{
-          'button.search' | translate
+          'SHARED.button.search' | translate
         }}</ngx-sirio-button>
         <ngx-sirio-button
           type="button"
           color="primary"
           (clickEvent)="onReset()"
-          >{{ 'button.cancel' | translate }}</ngx-sirio-button
+          >{{ 'SHARED.button.cancel' | translate }}</ngx-sirio-button
         >
       </div>
     </form>

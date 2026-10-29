@@ -1,6 +1,57 @@
 {
-  "button": {
-    "search": "Search",
-    "cancel": "Cancel"
+  "SHARED": {
+    "button": {
+      "search": "Search",
+      "cancel": "Cancel"
+    },
+    "select": {
+      "placeHolder": {
+        "language": "Language"
+      },
+      "language": {
+        "italian": "Italian",
+        "english": "English"
+      }
+    },
+    "form": {
+      "name": {
+        "placeholder": "Enter name",
+        "label": "Name"
+      },
+      "surname": {
+        "placeholder": "Enter surname",
+        "label": "Surname"
+      },
+      "date": {
+        "placeholder": "Enter date of birth",
+        "label": "Date of birth"
+      }
+    },
+    "side-bar": {
+      "home": "Home",
+      "service": "Services",
+      "question": "Questions",
+      "profile": "Profile",
+      "support": "Support",
+      "settings": "Settings",
+      "tables": "Tables"
+    }
+  },
+
+  "tabelle-section": {
+    "title": "Tables"
+  },
+
+  "home-section": {
+    "hero": {
+      "heroTitle": "Welcome",
+      "heroText": "Access INPS services, check your applications, and manage your benefits in one place.",
+      "searchBar": {
+        "placeholder": "Search for a service (e.g. NASpI, pension, single allowance...)"
+      },
+      "button": {
+        "search": "Search"
+      }
+    }
   }
 }

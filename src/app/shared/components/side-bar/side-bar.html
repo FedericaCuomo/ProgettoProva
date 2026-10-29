@@ -13,9 +13,9 @@
           ></span>
 
           <a
-            class="text-gray-500 capitalize no-underline select-none group-hover:text-blue-600! group-[.active]:text-blue-600!"
+            class="text-gray-500 no-underline select-none group-hover:text-blue-600! group-[.active]:text-blue-600!"
           >
-            {{ voice.name }}
+            {{ 'SHARED.side-bar.' + voice.name | translate }}
           </a>
         </div>
       }
@@ -33,11 +33,13 @@
       <div class="absolute z-50 flex flex-col gap-3 rounded-lg bg-white p-3">
         @for (voice of menu; track voice.id) {
           <a
-            class="text-[20px] capitalize"
+            class="text-[20px]"
             [routerLink]="voice.name"
             (click)="openMenu = false"
           >
-            <span class="hover:text-blue-500"> {{ voice.name }} </span>
+            <span class="hover:text-blue-500">
+              {{ 'SHARED.side-bar.' + voice.name | translate }}
+            </span>
           </a>
         }
       </div>

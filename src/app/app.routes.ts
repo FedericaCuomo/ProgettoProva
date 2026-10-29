@@ -11,38 +11,38 @@ export const routes: Routes = [
     loadComponent: () => import('./features/home/home').then(m => m.Home),
   },
   {
-    path: 'servizi',
+    path: 'service',
     loadComponent: () =>
       import('./features/catalogo-servizi/catalogo-servizi').then(
         m => m.CatalogoServizi,
       ),
   },
   {
-    path: 'domande',
+    path: 'question',
     loadComponent: () =>
       import('./features/domande/domande').then(m => m.Domande),
   },
   {
-    path: 'profilo',
+    path: 'profile',
     loadComponent: () =>
       import('./features/profile/profile').then(m => m.Profile),
   },
   {
-    path: 'assistenza',
+    path: 'support',
     loadComponent: () =>
       import('./features/catalogo-servizi/catalogo-servizi').then(
         m => m.CatalogoServizi,
       ),
   },
   {
-    path: 'impostazioni',
+    path: 'settings',
     loadComponent: () =>
       import('./features/catalogo-servizi/catalogo-servizi').then(
         m => m.CatalogoServizi,
       ),
   },
   {
-    path: 'tabelle',
+    path: 'tables',
     loadComponent: () =>
       import('./features/tabelle/tabelle').then(m => m.Tabelle),
   },

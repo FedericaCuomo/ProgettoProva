@@ -1,6 +1,57 @@
 {
-  "button": {
-    "search": "Cerca",
-    "cancel": "Annulla"
+  "SHARED": {
+    "button": {
+      "search": "Cerca",
+      "cancel": "Annulla"
+    },
+    "select": {
+      "placeHolder": {
+        "language": "Lingua"
+      },
+      "language": {
+        "italian": "Italiano",
+        "english": "Inglese"
+      }
+    },
+    "form": {
+      "name": {
+        "placeholder": "Inserisci nome",
+        "label": "Nome"
+      },
+      "surname": {
+        "placeholder": "Inserisci cognome",
+        "label": "Cognome"
+      },
+      "date": {
+        "placeholder": "Inserisci data di nascita",
+        "label": "Data di nascita"
+      }
+    },
+    "side-bar": {
+      "home": "Home",
+      "service": "Servizi",
+      "question": "Domande",
+      "profile": "Profilo",
+      "support": "Assistenza",
+      "settings": "Impostazioni",
+      "tables": "Tabelle"
+    }
+  },
+
+  "tabelle-section": {
+    "title": "Tabelle"
+  },
+
+  "home-section": {
+    "hero": {
+      "heroTitle": "Benvenuto",
+      "heroText": "Accedi ai servizi INPS, consulta le tue pratuche e gestisci le tue prestazioni in un unico posto.",
+      "searchBar": {
+        "placeholder": "Cerca un servizio (es. NASpI, pensione, assegno unico...)"
+      },
+      "button": {
+        "search": "Cerca"
+      }
+    }
   }
 }
