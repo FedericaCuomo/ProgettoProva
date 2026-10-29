@@ -1,12 +1,16 @@
 import {
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http'; // 1. Importa HttpClient
+import { provideHttpClient } from '@angular/common/http';
 import { provideHost } from 'ngx-sirio-lib-20';
-
+// traduzioni
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -14,7 +18,8 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(), // 2. Registralo qui!
+    provideHttpClient(),
+
     provideHost({
       env: 'dev',
       tracking: {
@@ -22,6 +27,20 @@ export const appConfig: ApplicationConfig = {
         Environment: 'DEV',
       },
       mockHeader: true,
+    }),
+
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18n/',
+        suffix: '.json',
+      }),
+      fallbackLang: 'it',
+      lang: 'it',
+    }),
+    provideAppInitializer(() => {
+      const translate = inject(TranslateService);
+      translate.addLangs(['it', 'en']);
+      return translate.use('it');
     }),
   ],
 };

@@ -19,5 +19,6 @@ export class SideBar {
     { name: 'profilo', icon: 'fa-solid fa-circle-user', id: 'm4' },
     { name: 'assistenza', icon: 'fa-solid fa-circle-question', id: 'm5' },
     { name: 'impostazioni', icon: 'fa-solid fa-gear', id: 'm6' },
+    { name: 'tabelle', icon: 'fa-solid fa-gear', id: 'm7' },
   ];
 }

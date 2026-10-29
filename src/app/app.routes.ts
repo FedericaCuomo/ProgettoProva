@@ -41,4 +41,9 @@ export const routes: Routes = [
         m => m.CatalogoServizi,
       ),
   },
+  {
+    path: 'tabelle',
+    loadComponent: () =>
+      import('./features/tabelle/tabelle').then(m => m.Tabelle),
+  },
 ];
