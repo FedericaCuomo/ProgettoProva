@@ -8,19 +8,16 @@
     <div class="fa-solid fa-bell"></div>
     <div class="fa-solid fa-circle-user"></div>
     <div routerLink="profilo">Mario Rossi</div>
-    <ngx-sirio-select
-      [placeholder]="'SHARED.select.language.english' | translate"
-    >
+    <ngx-sirio-select [value]="currentLanguage()">
       <ngx-sirio-select-panel
         ariaLabel="Elementi select"
         (optionSelected)="onSelectedLanguage($event)"
       >
-        <ngx-sirio-select-option value="it">{{
-          'SHARED.select.language.italian' | translate
-        }}</ngx-sirio-select-option>
-        <ngx-sirio-select-option value="en">
-          {{ 'SHARED.select.language.english' | translate }}
-        </ngx-sirio-select-option>
+        @for (lang of languageOption; track lang.value) {
+          <ngx-sirio-select-option [value]="lang.value">{{
+            lang.label | translate
+          }}</ngx-sirio-select-option>
+        }
       </ngx-sirio-select-panel>
     </ngx-sirio-select>
   </div>

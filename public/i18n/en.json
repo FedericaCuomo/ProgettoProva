@@ -23,7 +23,7 @@
         "label": "Surname"
       },
       "date": {
-        "placeholder": "Enter date of birth",
+        "placeholder": "dd/mm/yyyy",
         "label": "Date of birth"
       }
     },

@@ -10,7 +10,6 @@ import {
   SirioTitleBarActionComponent,
   SirioTableModule,
   SirioDataSource,
-  SirioButtonComponent,
 } from 'ngx-sirio-lib-20';
 
 @Component({
@@ -21,7 +20,6 @@ import {
     SirioTableModule,
     SirioTitleBarComponent,
     SirioTitleBarActionComponent,
-    SirioButtonComponent,
   ],
   templateUrl: './tabella.html',
 })

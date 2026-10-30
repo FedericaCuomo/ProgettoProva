@@ -10,7 +10,7 @@
         name="name"
         ariaLabel="input"
         formControlName="name"
-        maxLength="10"
+        textHelp="Lunghezza minima di 5 caratteri"
         [placeholder]="'SHARED.form.name.placeholder' | translate"
         [label]="'SHARED.form.name.label' | translate"
       />
@@ -18,31 +18,51 @@
         name="surname"
         ariaLabel="input"
         formControlName="surname"
-        maxLength="10"
+        textHelp="Lunghezza minima di 5 caratteri"
         [placeholder]="'SHARED.form.surname.placeholder' | translate"
         [label]="'SHARED.form.surname.label' | translate"
       />
-      <ngx-sirio-input
-        name="surname"
-        ariaLabel="input"
-        formControlName="surname"
-        maxLength="10"
+
+      <ngx-sirio-datepicker
+        name="date"
+        formControlName="date"
         [placeholder]="'SHARED.form.date.placeholder' | translate"
         [label]="'SHARED.form.date.label' | translate"
       />
 
       <!-- clickEvent con le tonde perchè Output -->
       <div class="flex gap-5">
-        <ngx-sirio-button type="submit" color="primary">{{
-          'SHARED.button.search' | translate
-        }}</ngx-sirio-button>
+        <ngx-sirio-button
+          type="submit"
+          color="primary"
+          [disabled]="searchForm.invalid"
+          >{{ 'SHARED.button.search' | translate }}</ngx-sirio-button
+        >
         <ngx-sirio-button
           type="button"
-          color="primary"
+          color="danger"
           (clickEvent)="onReset()"
           >{{ 'SHARED.button.cancel' | translate }}</ngx-sirio-button
         >
       </div>
     </form>
   </div>
+</div>
+@if (errorDate() === true) {
+  <ngx-sirio-alert type="error" labelClose="Chiudi messaggio di alert">
+    <ngx-sirio-alert-message>
+      <p>
+        <strong>Alert di errore</strong> La data di nascita non può essere
+        precedente al 1990.
+      </p>
+    </ngx-sirio-alert-message>
+  </ngx-sirio-alert>
+}
+<div>
+  @if (isLoading() === true) {
+    <app-loader />
+  }
+  @if (hasSearched() === true) {
+    <ngx-sirio-table [data]="tableSetup.data" [columns]="tableSetup.columns" />
+  }
 </div>

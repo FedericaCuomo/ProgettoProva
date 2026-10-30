@@ -23,7 +23,7 @@
         "label": "Cognome"
       },
       "date": {
-        "placeholder": "Inserisci data di nascita",
+        "placeholder": "gg/mm/aaaa",
         "label": "Data di nascita"
       }
     },
