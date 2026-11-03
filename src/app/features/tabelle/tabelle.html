@@ -1,68 +1,106 @@
-<h1>{{ 'tabelle-section.title' | translate }}</h1>
-<div class="flex justify-center">
-  <div class="rounded-2xl bg-blue-50 p-5">
-    <form
-      class="flex flex-col gap-5"
-      [formGroup]="searchForm"
-      (ngSubmit)="onSearch()"
-    >
-      <ngx-sirio-input
-        name="name"
-        ariaLabel="input"
-        formControlName="name"
-        textHelp="Lunghezza minima di 5 caratteri"
-        [placeholder]="'SHARED.form.name.placeholder' | translate"
-        [label]="'SHARED.form.name.label' | translate"
-      />
-      <ngx-sirio-input
-        name="surname"
-        ariaLabel="input"
-        formControlName="surname"
-        textHelp="Lunghezza minima di 5 caratteri"
-        [placeholder]="'SHARED.form.surname.placeholder' | translate"
-        [label]="'SHARED.form.surname.label' | translate"
-      />
+<div class="flex min-h-full flex-col gap-10 bg-[#f7f9fb] p-3 px-5 pb-20">
+  <h1>{{ 'tabelle-section.title' | translate }}</h1>
+  <div class="flex justify-center">
+    <div class="rounded-2xl bg-blue-100 p-5">
+      <form
+        class="flex flex-col gap-5"
+        [formGroup]="searchForm"
+        (ngSubmit)="onSearch()"
+      >
+        <ngx-sirio-input
+          name="name"
+          ariaLabel="input"
+          formControlName="name"
+          validation
+          [placeholder]="'SHARED.form.name.placeholder' | translate"
+          [label]="'SHARED.form.name.label' | translate"
+          [canValidate]="searchForm.controls.name.touched ? true : false"
+          [textFeedback]="
+            searchForm.controls.name.valid ?
+              ''
+            : 'Il nome deve avere minimo 5 caratteri'
+          "
+          [showWhenValid]="true"
+        />
+        <ngx-sirio-input
+          name="surname"
+          ariaLabel="input"
+          formControlName="surname"
+          validation
+          [placeholder]="'SHARED.form.surname.placeholder' | translate"
+          [label]="'SHARED.form.surname.label' | translate"
+          [canValidate]="searchForm.controls.surname.touched ? true : false"
+          [textFeedback]="
+            searchForm.controls.surname.valid ?
+              ''
+            : 'Il cognome deve avere minimo 5 caratteri'
+          "
+          [showWhenValid]="true"
+        />
 
-      <ngx-sirio-datepicker
-        name="date"
-        formControlName="date"
-        [placeholder]="'SHARED.form.date.placeholder' | translate"
-        [label]="'SHARED.form.date.label' | translate"
-      />
+        <ngx-sirio-datepicker
+          name="date"
+          formControlName="date"
+          labelPopover="La data non deve essere precedente al 1990"
+          [placeholder]="'SHARED.form.date.placeholder' | translate"
+          [label]="'SHARED.form.date.label' | translate"
+        />
 
-      <!-- clickEvent con le tonde perchè Output -->
-      <div class="flex gap-5">
-        <ngx-sirio-button
-          type="submit"
-          color="primary"
-          [disabled]="searchForm.invalid"
-          >{{ 'SHARED.button.search' | translate }}</ngx-sirio-button
-        >
-        <ngx-sirio-button
-          type="button"
-          color="danger"
-          (clickEvent)="onReset()"
-          >{{ 'SHARED.button.cancel' | translate }}</ngx-sirio-button
-        >
-      </div>
-    </form>
+        <ngx-sirio-select formControlName="nazioni">
+          <ngx-sirio-select-panel ariaLabel="Elementi select">
+            @for (nazione of nazioniOptions(); track nazione.id) {
+              <ngx-sirio-select-option [value]="nazione.id">{{
+                nazione.descrizione
+              }}</ngx-sirio-select-option>
+            }
+          </ngx-sirio-select-panel>
+        </ngx-sirio-select>
+
+        <!-- clickEvent con le tonde perchè Output -->
+        <div class="flex gap-5">
+          <ngx-sirio-button
+            type="submit"
+            color="primary"
+            [disabled]="searchForm.invalid || isLoading()"
+            >{{ 'SHARED.button.search' | translate }}</ngx-sirio-button
+          >
+          <ngx-sirio-button
+            type="button"
+            color="danger"
+            (clickEvent)="onReset()"
+            >{{ 'SHARED.button.cancel' | translate }}</ngx-sirio-button
+          >
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-@if (errorDate() === true) {
-  <ngx-sirio-alert type="error" labelClose="Chiudi messaggio di alert">
-    <ngx-sirio-alert-message>
-      <p>
-        <strong>Alert di errore</strong> La data di nascita non può essere
-        precedente al 1990.
-      </p>
-    </ngx-sirio-alert-message>
-  </ngx-sirio-alert>
-}
-<div>
-  @if (isLoading() === true) {
-    <app-loader />
+  @if (errorDate() === true) {
+    <ngx-sirio-alert type="error" labelClose="Chiudi messaggio di alert">
+      <ngx-sirio-alert-message>
+        <p>
+          <strong>Alert di errore</strong> La data di nascita non può essere
+          precedente al 1990.
+        </p>
+      </ngx-sirio-alert-message>
+    </ngx-sirio-alert>
   }
-  @if (hasSearched() === true) {
-    <ngx-sirio-table [data]="tableSetup.data" [columns]="tableSetup.columns" />
-  }
+  <div>
+    @if (isLoading() === true) {
+      <div
+        class="absolute inset-0 z-50 flex items-center justify-center bg-white/70"
+      >
+        <app-loader />
+      </div>
+    }
+    @if (showTable() === true) {
+      <ngx-sirio-table
+        [data]="tableSetup.data"
+        [columns]="tableSetup.columns"
+      />
+    }
+  </div>
+  <ngx-sirio-button type="button" color="danger" (clickEvent)="onLoad()">{{
+    'SHARED.button.cancel' | translate
+  }}</ngx-sirio-button>
+  <div>risposta: {{ text() }}</div>
 </div>

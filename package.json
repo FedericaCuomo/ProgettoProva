@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "mock": "mockoon-cli start --data ./mocks/mockoon.config.json",
+    "start:mock": "concurrently \"npm run mock\" \"ng serve\""
   },
   "prettier": {
     "printWidth": 100,

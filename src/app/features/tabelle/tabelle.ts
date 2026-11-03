@@ -1,4 +1,13 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { TipologicheService } from './../../core/api-services/tipologiche/tipologiche.service';
+import { TestService } from './../../core/api-services/test-api/test-api.service';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
+  inject,
+  OnInit,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -15,10 +24,15 @@ import {
   SirioButtonComponent,
   SirioAlertComponent,
   SirioAlertMessageComponent,
+  SirioValidationDirective,
+  SirioSelectComponent,
+  SirioSelectPanelComponent,
+  SirioSelectOptionComponent,
 } from 'ngx-sirio-lib-20';
 import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
+import { Nazioni } from '../../core/api-services/tipologiche/tipologiche.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,14 +47,27 @@ import { Loader } from '../../shared/components/loader/loader';
     SirioAlertComponent,
     SirioAlertMessageComponent,
     Loader,
+    SirioValidationDirective,
+    SirioSelectComponent,
+    SirioSelectPanelComponent,
+    SirioSelectOptionComponent,
   ],
   templateUrl: './tabelle.html',
   styleUrl: './tabelle.scss',
 })
-export class Tabelle {
+export class Tabelle implements OnInit {
+  public testService = inject(TestService);
+  public tipologicheService = inject(TipologicheService);
+
+  nazioniOptions = signal<Nazioni[]>([]);
+  text = signal<string>('');
   hasSearched = signal<boolean>(false);
+  // showTable = signal<boolean>(false);
   isLoading = signal<boolean>(false);
   errorDate = signal<boolean>(false);
+  showTable = computed<boolean>(
+    () => this.hasSearched() && !this.isLoading() && !this.errorDate(),
+  );
 
   // tabella
   tableDataSignal: TableData[] = [
@@ -92,23 +119,45 @@ export class Tabelle {
       Validators.minLength(5),
     ]),
     date: new FormControl<string | null>('', [Validators.required]),
+    nazioni: new FormControl<string | null>(''),
   });
 
+  constructor() {
+    this.tipologicheService.getNazioni().subscribe({
+      next: res => {
+        this.nazioniOptions.set(res);
+      },
+    });
+  }
+
+  ngOnInit(): void {
+    console.log('onInit');
+  }
+
+  onLoad() {
+    this.testService.call().subscribe({
+      next: res => {
+        this.text.set(res.test);
+      },
+    });
+  }
+
   onSearch() {
+    this.hasSearched.set(true);
     this.isLoading.set(true);
+    this.errorDate.set(false);
     setTimeout(() => {
       this.isLoading.set(false);
-      this.hasSearched.set(true);
-    }, 5000);
 
-    const dateForm = this.searchForm.controls.date.value?.split('/');
-    if (dateForm) {
-      if (Number(dateForm[2]) < 1990) {
-        this.errorDate.set(true);
-      } else {
-        this.errorDate.set(false);
+      const dateForm = this.searchForm.controls.date.value?.split('/');
+      if (dateForm) {
+        if (Number(dateForm[2]) < 1990) {
+          this.errorDate.set(true);
+        } else {
+          this.errorDate.set(false);
+        }
       }
-    }
+    }, 3000);
 
     console.log('nome:', this.searchForm.controls.name.value);
     console.log('cognome:', this.searchForm.controls.surname.value);
