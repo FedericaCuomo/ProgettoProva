@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { ServicesType } from '../../types';
+import { ServicesType } from '../models/services.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -44,7 +44,7 @@ export class ServiziForniti {
   ]);
 
   addService(newService: ServicesType): void {
-    this.services.update((listaAttuale) => [...listaAttuale, newService]);
+    this.services.update(listaAttuale => [...listaAttuale, newService]);
   }
 
   getColorBox(category: string): string {
@@ -82,7 +82,7 @@ export class ServiziForniti {
     if (!cleanQuery) {
       return this.services();
     }
-    return this.services().filter((service) => {
+    return this.services().filter(service => {
       return (
         service.name.toLowerCase().includes(cleanQuery) ||
         service.text.toLowerCase().includes(cleanQuery)

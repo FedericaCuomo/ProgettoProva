@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MenuType } from '../../../types';
 import { SirioButtonComponent } from 'ngx-sirio-lib-20';
 import { NgClass } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { MenuType } from './models/side-bar.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

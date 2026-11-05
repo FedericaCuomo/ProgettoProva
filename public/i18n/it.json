@@ -33,6 +33,10 @@
       "city": {
         "placeholder": "Inserisci la città",
         "label": "Città"
+      },
+      "gender": {
+        "placeholder": "Inserisci il genere",
+        "label": "Genere"
       }
     },
     "side-bar": {

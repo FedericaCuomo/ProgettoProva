@@ -207,6 +207,56 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "57152260-97bd-43d9-a1c3-cc3fefb38bc4",
+      "type": "http",
+      "documentation": "Example route: remove or replace it",
+      "method": "post",
+      "endpoint": "getGender",
+      "responses": [
+        {
+          "uuid": "bc5f55d1-6cbe-4bbb-8d61-45615dfb8946",
+          "body": "{\n  \"message\": \"ok\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "FILE",
+          "filePath": "./gender.mock.json",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3254b731-b866-49dd-b918-477cb0e8b5a4",
+          "body": "{\n  \"error\": \"Internal server error\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Error response",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -225,6 +275,10 @@
     {
       "type": "route",
       "uuid": "202f88c6-a773-4d1f-84b1-d0dc2528e49a"
+    },
+    {
+      "type": "route",
+      "uuid": "57152260-97bd-43d9-a1c3-cc3fefb38bc4"
     }
   ],
   "proxyMode": false,

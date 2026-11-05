@@ -33,6 +33,10 @@
       "city": {
         "placeholder": "Enter city",
         "label": "City"
+      },
+      "gender": {
+        "placeholder": "Enter gender",
+        "label": "Gender"
       }
     },
     "side-bar": {

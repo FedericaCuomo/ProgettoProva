@@ -28,11 +28,13 @@ import {
   SirioSelectComponent,
   SirioSelectPanelComponent,
   SirioSelectOptionComponent,
+  SirioRadioButtonComponent,
+  SirioRadioGroupComponent,
 } from 'ngx-sirio-lib-20';
 import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
-import { Luogo } from '../../core/api-services/tipologiche/tipologiche.model';
+import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,6 +53,8 @@ import { Luogo } from '../../core/api-services/tipologiche/tipologiche.model';
     SirioSelectComponent,
     SirioSelectPanelComponent,
     SirioSelectOptionComponent,
+    SirioRadioButtonComponent,
+    SirioRadioGroupComponent,
   ],
   templateUrl: './tabelle.html',
   styleUrl: './tabelle.scss',
@@ -59,8 +63,9 @@ export class Tabelle implements OnInit {
   public testService = inject(TestService);
   public tipologicheService = inject(TipologicheService);
 
-  nazioniOptions = signal<Luogo[]>([]);
-  cityOptions = signal<Luogo[]>([]);
+  nazioniOptions = signal<Opzioni[]>([]);
+  cityOptions = signal<Opzioni[]>([]);
+  genderOptions = signal<Opzioni[]>([]);
   text = signal<string>('');
   hasSearched = signal<boolean>(false);
   isLoading = signal<boolean>(false);
@@ -120,7 +125,8 @@ export class Tabelle implements OnInit {
     ]),
     date: new FormControl<string | null>('', [Validators.required]),
     nazioni: new FormControl<string | null>('', [Validators.required]),
-    citta: new FormControl<string | null>('', [Validators.required]),
+    city: new FormControl<string | null>('', [Validators.required]),
+    gender: new FormControl<string | null>(''),
   });
 
   constructor() {
@@ -132,6 +138,11 @@ export class Tabelle implements OnInit {
     this.tipologicheService.getCitta().subscribe({
       next: res => {
         this.cityOptions.set(res);
+      },
+    });
+    this.tipologicheService.getGender().subscribe({
+      next: res => {
+        this.genderOptions.set(res);
       },
     });
   }

@@ -16,8 +16,8 @@ import {
   SirioValidationDirective,
 } from 'ngx-sirio-lib-20';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'; // <-- 1. Importiamo i moduli dei Reactive Forms
-import { CardField } from '../../../../types';
 import { UserProfile } from '../../../../core/api-services/profilo/profilo.model';
+import { CardField } from '../../models/profile.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -13,7 +13,6 @@ import {
   SirioButtonComponent,
   SirioValidationDirective,
 } from 'ngx-sirio-lib-20';
-import { ServicesType } from '../../../../types';
 import {
   FormControl,
   FormGroup,
@@ -22,6 +21,7 @@ import {
 } from '@angular/forms';
 import { ServiziForniti } from '../../../../shared/services/servizi-forniti';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ServicesType } from '../../../../shared/models/services.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

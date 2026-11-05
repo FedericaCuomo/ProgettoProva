@@ -5,13 +5,13 @@ import {
   Input,
   signal,
 } from '@angular/core';
-import { CardField } from '../../../../types';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { SirioDialogService } from 'ngx-sirio-lib-20';
 // import { EditProfileDialog } from '../edit-form-profile/edit-form-profile';
 import { ProfileService } from '../../../../core/api-services/profilo/profilo.service';
 import { UserProfile } from '../../../../core/api-services/profilo/profilo.model';
+import { CardField } from '../../models/profile.model';
 @Component({
   selector: 'app-card-profile',
   imports: [FormsModule, ReactiveFormsModule, NgClass],

@@ -1,8 +1,8 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Hero } from './components/hero/hero';
-import { CardConfig, CardField } from '../../types';
 import { CardProfileComponent } from './components/card-profile/card-profile';
 import { UserCard } from './components/user-card/user-card';
+import { CardConfig, CardField } from './models/profile.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -5,8 +5,8 @@ import { Filter } from './components/filter/filter';
 import { Search } from './components/search/search';
 import { SirioButtonComponent, SirioDialogService } from 'ngx-sirio-lib-20';
 import { ServiziForniti } from '../../shared/services/servizi-forniti';
-import { ServicesType } from '../../types';
 import { AddServiceForm } from './components/add-service-form/add-service-form';
+import { ServicesType } from '../../shared/models/services.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

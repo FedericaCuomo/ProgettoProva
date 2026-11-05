@@ -1,4 +1,4 @@
-export interface Luogo {
+export interface Opzioni {
   id: string;
   descrizione: string;
 }

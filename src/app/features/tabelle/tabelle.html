@@ -49,6 +49,13 @@
 
           <ngx-sirio-select
             formControlName="nazioni"
+            validation
+            [canValidate]="searchForm.controls.nazioni.touched ? true : false"
+            [textFeedback]="
+              searchForm.controls.nazioni.valid ?
+                ''
+              : 'La nazione è obbligatoria'
+            "
             [label]="'SHARED.form.nation.label' | translate"
             [placeholder]="'SHARED.form.nation.placeholder' | translate"
           >
@@ -62,7 +69,7 @@
           </ngx-sirio-select>
 
           <ngx-sirio-select
-            formControlName="citta"
+            formControlName="city"
             [label]="'SHARED.form.city.label' | translate"
             [placeholder]="'SHARED.form.city.placeholder' | translate"
           >
@@ -74,6 +81,18 @@
               }
             </ngx-sirio-select-panel>
           </ngx-sirio-select>
+
+          <ngx-sirio-radio-group
+            ariaLabel="Scegli un opzione"
+            formControlName="gender"
+            [label]="'SHARED.form.gender.label' | translate"
+          >
+            @for (gender of genderOptions(); track gender.id) {
+              <ngx-sirio-radio-button name="gender" [value]="gender.id">
+                {{ gender.descrizione }}
+              </ngx-sirio-radio-button>
+            }
+          </ngx-sirio-radio-group>
         </div>
         <!-- clickEvent con le tonde perchè Output -->
         <div class="flex justify-center gap-5">
