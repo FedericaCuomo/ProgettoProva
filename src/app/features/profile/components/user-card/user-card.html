@@ -8,16 +8,16 @@
   />
   <div>
     @if (user(); as userData) {
-      <h2>{{ userData.fullname }}</h2>
+      <h2>{{ userData.nome }}</h2>
       <div class="flex flex-col gap-3 sm:flex-row">
         <div class="flex flex-wrap items-center gap-2">
           <div class="fa-solid fa-id-card"></div>
           <div>CF:</div>
-          <span>{{ userData.CF }}</span>
+          <span>{{ userData.codiceFiscale }}</span>
         </div>
         <div class="flex items-center gap-2">
           <div class="fa-solid fa-location-dot"></div>
-          <div>{{ userData.city }}</div>
+          <div>{{ userData.cittaResidenza }}</div>
         </div>
       </div>
     }

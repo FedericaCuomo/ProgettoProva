@@ -1,3 +1,5 @@
+import { UserProfile } from './core/api-services/profilo/profilo.model';
+
 export type ServicesType = {
   name: string;
   text: string;
@@ -11,18 +13,8 @@ export type MenuType = {
   id: string;
 };
 
-export type UserType = {
-  fullname: string;
-  date: string;
-  city: string;
-  address: string;
-  status: string;
-  CF: string;
-  mail: string;
-  phone: string;
-};
 export type CardField = {
-  key: keyof UserType;
+  key: keyof UserProfile;
   label: string;
 };
 

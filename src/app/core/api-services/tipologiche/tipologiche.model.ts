@@ -1,4 +1,4 @@
-export interface Nazioni {
+export interface Luogo {
   id: string;
   descrizione: string;
 }

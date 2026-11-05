@@ -107,6 +107,106 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "a026db31-b650-4fcc-8a90-91d3bf2036db",
+      "type": "http",
+      "documentation": "Example route: remove or replace it",
+      "method": "post",
+      "endpoint": "getUser",
+      "responses": [
+        {
+          "uuid": "dac41ab7-3177-467a-bed4-ef3c29c759e6",
+          "body": "{\n  \"message\": \"ok\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "FILE",
+          "filePath": "./user-profile.mock.json",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "91cd1f1a-34e5-4701-bdee-9e1cd7e6fdb8",
+          "body": "{\n  \"error\": \"Internal server error\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Error response",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "202f88c6-a773-4d1f-84b1-d0dc2528e49a",
+      "type": "http",
+      "documentation": "Example route: remove or replace it",
+      "method": "post",
+      "endpoint": "getCitta",
+      "responses": [
+        {
+          "uuid": "57bbbe1f-92b3-40f9-bcc8-41f6e53233a6",
+          "body": "{\n  \"message\": \"ok\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "FILE",
+          "filePath": "./citta-ddl.mock.json",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "dc48b0dc-c00b-43dc-8696-423f4224ae5c",
+          "body": "{\n  \"error\": \"Internal server error\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Error response",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -117,6 +217,14 @@
     {
       "type": "route",
       "uuid": "949b1c4b-5bcc-462a-b0f8-270ce603687e"
+    },
+    {
+      "type": "route",
+      "uuid": "a026db31-b650-4fcc-8a90-91d3bf2036db"
+    },
+    {
+      "type": "route",
+      "uuid": "202f88c6-a773-4d1f-84b1-d0dc2528e49a"
     }
   ],
   "proxyMode": false,

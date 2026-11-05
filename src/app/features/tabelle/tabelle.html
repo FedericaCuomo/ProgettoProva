@@ -7,57 +7,76 @@
         [formGroup]="searchForm"
         (ngSubmit)="onSearch()"
       >
-        <ngx-sirio-input
-          name="name"
-          ariaLabel="input"
-          formControlName="name"
-          validation
-          [placeholder]="'SHARED.form.name.placeholder' | translate"
-          [label]="'SHARED.form.name.label' | translate"
-          [canValidate]="searchForm.controls.name.touched ? true : false"
-          [textFeedback]="
-            searchForm.controls.name.valid ?
-              ''
-            : 'Il nome deve avere minimo 5 caratteri'
-          "
-          [showWhenValid]="true"
-        />
-        <ngx-sirio-input
-          name="surname"
-          ariaLabel="input"
-          formControlName="surname"
-          validation
-          [placeholder]="'SHARED.form.surname.placeholder' | translate"
-          [label]="'SHARED.form.surname.label' | translate"
-          [canValidate]="searchForm.controls.surname.touched ? true : false"
-          [textFeedback]="
-            searchForm.controls.surname.valid ?
-              ''
-            : 'Il cognome deve avere minimo 5 caratteri'
-          "
-          [showWhenValid]="true"
-        />
+        <div class="grid grid-cols-3 gap-3">
+          <ngx-sirio-input
+            name="name"
+            ariaLabel="input"
+            formControlName="name"
+            validation
+            [placeholder]="'SHARED.form.name.placeholder' | translate"
+            [label]="'SHARED.form.name.label' | translate"
+            [canValidate]="searchForm.controls.name.touched ? true : false"
+            [textFeedback]="
+              searchForm.controls.name.valid ?
+                ''
+              : 'Il nome deve avere minimo 5 caratteri'
+            "
+            [showWhenValid]="true"
+          />
+          <ngx-sirio-input
+            name="surname"
+            ariaLabel="input"
+            formControlName="surname"
+            validation
+            [placeholder]="'SHARED.form.surname.placeholder' | translate"
+            [label]="'SHARED.form.surname.label' | translate"
+            [canValidate]="searchForm.controls.surname.touched ? true : false"
+            [textFeedback]="
+              searchForm.controls.surname.valid ?
+                ''
+              : 'Il cognome deve avere minimo 5 caratteri'
+            "
+            [showWhenValid]="true"
+          />
 
-        <ngx-sirio-datepicker
-          name="date"
-          formControlName="date"
-          labelPopover="La data non deve essere precedente al 1990"
-          [placeholder]="'SHARED.form.date.placeholder' | translate"
-          [label]="'SHARED.form.date.label' | translate"
-        />
+          <ngx-sirio-datepicker
+            name="date"
+            formControlName="date"
+            labelPopover="La data non deve essere precedente al 1990"
+            [placeholder]="'SHARED.form.date.placeholder' | translate"
+            [label]="'SHARED.form.date.label' | translate"
+          />
 
-        <ngx-sirio-select formControlName="nazioni">
-          <ngx-sirio-select-panel ariaLabel="Elementi select">
-            @for (nazione of nazioniOptions(); track nazione.id) {
-              <ngx-sirio-select-option [value]="nazione.id">{{
-                nazione.descrizione
-              }}</ngx-sirio-select-option>
-            }
-          </ngx-sirio-select-panel>
-        </ngx-sirio-select>
+          <ngx-sirio-select
+            formControlName="nazioni"
+            [label]="'SHARED.form.nation.label' | translate"
+            [placeholder]="'SHARED.form.nation.placeholder' | translate"
+          >
+            <ngx-sirio-select-panel ariaLabel="Elementi select">
+              @for (nazione of nazioniOptions(); track nazione.id) {
+                <ngx-sirio-select-option [value]="nazione.id">{{
+                  nazione.descrizione
+                }}</ngx-sirio-select-option>
+              }
+            </ngx-sirio-select-panel>
+          </ngx-sirio-select>
 
+          <ngx-sirio-select
+            formControlName="citta"
+            [label]="'SHARED.form.city.label' | translate"
+            [placeholder]="'SHARED.form.city.placeholder' | translate"
+          >
+            <ngx-sirio-select-panel ariaLabel="Elementi select">
+              @for (city of cityOptions(); track city.id) {
+                <ngx-sirio-select-option [value]="city.id">{{
+                  city.descrizione
+                }}</ngx-sirio-select-option>
+              }
+            </ngx-sirio-select-panel>
+          </ngx-sirio-select>
+        </div>
         <!-- clickEvent con le tonde perchè Output -->
-        <div class="flex gap-5">
+        <div class="flex justify-center gap-5">
           <ngx-sirio-button
             type="submit"
             color="primary"

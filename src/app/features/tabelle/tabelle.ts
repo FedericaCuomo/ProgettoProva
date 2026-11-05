@@ -32,7 +32,7 @@ import {
 import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
-import { Nazioni } from '../../core/api-services/tipologiche/tipologiche.model';
+import { Luogo } from '../../core/api-services/tipologiche/tipologiche.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,10 +59,10 @@ export class Tabelle implements OnInit {
   public testService = inject(TestService);
   public tipologicheService = inject(TipologicheService);
 
-  nazioniOptions = signal<Nazioni[]>([]);
+  nazioniOptions = signal<Luogo[]>([]);
+  cityOptions = signal<Luogo[]>([]);
   text = signal<string>('');
   hasSearched = signal<boolean>(false);
-  // showTable = signal<boolean>(false);
   isLoading = signal<boolean>(false);
   errorDate = signal<boolean>(false);
   showTable = computed<boolean>(
@@ -119,13 +119,19 @@ export class Tabelle implements OnInit {
       Validators.minLength(5),
     ]),
     date: new FormControl<string | null>('', [Validators.required]),
-    nazioni: new FormControl<string | null>(''),
+    nazioni: new FormControl<string | null>('', [Validators.required]),
+    citta: new FormControl<string | null>('', [Validators.required]),
   });
 
   constructor() {
     this.tipologicheService.getNazioni().subscribe({
       next: res => {
         this.nazioniOptions.set(res);
+      },
+    });
+    this.tipologicheService.getCitta().subscribe({
+      next: res => {
+        this.cityOptions.set(res);
       },
     });
   }
@@ -135,8 +141,10 @@ export class Tabelle implements OnInit {
   }
 
   onLoad() {
+    this.isLoading.set(true);
     this.testService.call().subscribe({
       next: res => {
+        this.isLoading.set(false);
         this.text.set(res.test);
       },
     });

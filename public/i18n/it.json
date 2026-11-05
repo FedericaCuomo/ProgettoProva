@@ -25,6 +25,14 @@
       "date": {
         "placeholder": "gg/mm/aaaa",
         "label": "Data di nascita"
+      },
+      "nation": {
+        "placeholder": "Inserisci la nazione",
+        "label": "Nazione"
+      },
+      "city": {
+        "placeholder": "Inserisci la città",
+        "label": "Città"
       }
     },
     "side-bar": {

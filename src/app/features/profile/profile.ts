@@ -1,6 +1,6 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Hero } from './components/hero/hero';
-import { CardConfig, CardField, UserType } from '../../types';
+import { CardConfig, CardField } from '../../types';
 import { CardProfileComponent } from './components/card-profile/card-profile';
 import { UserCard } from './components/user-card/user-card';
 
@@ -12,15 +12,16 @@ import { UserCard } from './components/user-card/user-card';
 })
 export class Profile {
   datiAnagraficiFields = signal<CardField[]>([
-    { key: 'fullname', label: 'Nome e Cognome' },
-    { key: 'date', label: 'Data e luogo di nascita' },
-    { key: 'address', label: 'Indirizzo di residenza' },
-    { key: 'status', label: 'Stato civile' },
+    { key: 'nome', label: 'Nome ' },
+    { key: 'cognome', label: 'Cognome ' },
+    { key: 'dataNascita', label: 'Data di nascita' },
+    { key: 'indirizzoResidenza', label: 'Indirizzo di residenza' },
+    { key: 'statoCivile', label: 'Stato civile' },
   ]);
 
   contattiFields = signal<CardField[]>([
     { key: 'mail', label: 'Email principale' },
-    { key: 'phone', label: 'Numero di telefono' },
+    { key: 'telefono', label: 'Numero di telefono' },
   ]);
 
   profileCardsConfig = signal<CardConfig[]>([
@@ -36,19 +37,19 @@ export class Profile {
     },
   ]);
 
-  user = signal<UserType>({
-    fullname: 'Mario Rossi',
-    date: '22/11/2000',
-    city: 'Torino',
-    address: 'corso Francia 79',
-    status: 'coniugato',
-    CF: 'CMUFRC00S62F839Q',
-    mail: 'mario.rossi@gmail.com',
-    phone: '3336243038',
-  });
+  // user = signal<UserType>({
+  //   fullname: 'Mario Rossi',
+  //   date: '22/11/2000',
+  //   city: 'Torino',
+  //   address: 'corso Francia 79',
+  //   status: 'coniugato',
+  //   CF: 'CMUFRC00S62F839Q',
+  //   mail: 'mario.rossi@gmail.com',
+  //   phone: '3336243038',
+  // });
 
   // set è un metodo dei signal e si usa per sovrascrivere il valore con uno nuovo
-  onUserUpdated(nuoviDatiUtente: UserType) {
-    this.user.set(nuoviDatiUtente);
-  }
+  // onUserUpdated(nuoviDatiUtente: UserType) {
+  //   this.user.set(nuoviDatiUtente);
+  // }
 }

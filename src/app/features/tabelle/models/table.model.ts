@@ -5,4 +5,5 @@ export type AnagraficaForm = {
   surname: FormControl<string | null>;
   date: FormControl<string | null>;
   nazioni: FormControl<string | null>;
+  citta: FormControl<string | null>;
 };

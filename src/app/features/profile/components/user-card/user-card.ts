@@ -1,5 +1,11 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
-import { UserType } from '../../../../types';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  inject,
+  signal,
+} from '@angular/core';
+import { ProfileService } from '../../../../core/api-services/profilo/profilo.service';
+import { UserProfile } from '../../../../core/api-services/profilo/profilo.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,8 +14,14 @@ import { UserType } from '../../../../types';
   templateUrl: './user-card.html',
 })
 export class UserCard {
-  // @Input({ required: true }) user!: UserType;
+  public profileService = inject(ProfileService);
+  user = signal<UserProfile | undefined>(undefined);
 
-  // input signal
-  user = input<UserType>();
+  constructor() {
+    this.profileService.getUser().subscribe({
+      next: res => {
+        this.user.set(res);
+      },
+    });
+  }
 }

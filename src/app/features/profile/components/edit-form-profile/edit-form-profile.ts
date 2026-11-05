@@ -16,7 +16,8 @@ import {
   SirioValidationDirective,
 } from 'ngx-sirio-lib-20';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'; // <-- 1. Importiamo i moduli dei Reactive Forms
-import { CardField, UserType } from '../../../../types';
+import { CardField } from '../../../../types';
+import { UserProfile } from '../../../../core/api-services/profilo/profilo.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,7 +43,7 @@ export class EditProfileDialog extends SirioDialogElement {
   // serve per prendere i dati dal padre (cardProfile) - solo lettura e viene specificata la struttura di questi dati
   get profileData() {
     return this.data as {
-      user: UserType;
+      user: UserProfile;
       cardFields: CardField[];
       title: string;
     };

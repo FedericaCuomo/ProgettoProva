@@ -25,6 +25,14 @@
       "date": {
         "placeholder": "dd/mm/yyyy",
         "label": "Date of birth"
+      },
+      "nation": {
+        "placeholder": "Enter nation",
+        "label": "Nation"
+      },
+      "city": {
+        "placeholder": "Enter city",
+        "label": "City"
       }
     },
     "side-bar": {
