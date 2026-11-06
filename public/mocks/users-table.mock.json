@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Federica",
+    "surname": "Cuomo",
+    "date": "22/11/2000",
+    "nazioni": "Italia",
+    "city": "Napoli",
+    "gender": "Donna"
+  },
+  {
+    "name": "Mario",
+    "surname": "Rossi",
+    "date": "05/07/1993",
+    "nazioni": "Italia",
+    "city": "Milano",
+    "gender": "Uomo"
+  },
+  {
+    "name": "Federica",
+    "surname": "Cuomo",
+    "date": "22/11/2000",
+    "nazioni": "Spagna",
+    "city": "Madrid",
+    "gender": "Altro"
+  }
+]

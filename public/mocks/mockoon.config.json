@@ -16,25 +16,6 @@
       "endpoint": "example",
       "responses": [
         {
-          "uuid": "d91b6e47-3a28-4c5f-8e10-7f2c4a9b5d03",
-          "body": "{\n  \"message\": \"ok\",\n  \"test\": \"testo di prova\"\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
           "uuid": "2e5c8a90-b147-4d36-a6f2-9c3d1e8b7a54",
           "body": "{\n  \"error\": \"Internal server error\"\n}",
           "latency": 0,
@@ -49,7 +30,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
@@ -257,6 +238,94 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "d1063ea2-6b23-46a9-9c26-328af8d11fd1",
+      "type": "http",
+      "documentation": "Example route: remove or replace it",
+      "method": "post",
+      "endpoint": "getUsersTable",
+      "responses": [
+        {
+          "uuid": "d3b36730-3592-4d64-9fcf-36d977aeece4",
+          "body": "{\n  \"message\": \"ok\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "FILE",
+          "filePath": "./users-table.mock.json",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cc0e2354-8c2a-4092-bf5f-1fe7f6b165b8",
+          "body": "{\n  \"error\": \"Internal server error\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Error response",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "889ebbef-3b35-4485-a237-a91a005e4a00",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4b0ab8b8-5c8c-4dec-be9d-e391bb3180bd",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -279,6 +348,10 @@
     {
       "type": "route",
       "uuid": "57152260-97bd-43d9-a1c3-cc3fefb38bc4"
+    },
+    {
+      "type": "route",
+      "uuid": "d1063ea2-6b23-46a9-9c26-328af8d11fd1"
     }
   ],
   "proxyMode": false,

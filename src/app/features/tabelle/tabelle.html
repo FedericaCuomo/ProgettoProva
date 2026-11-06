@@ -7,14 +7,14 @@
         [formGroup]="searchForm"
         (ngSubmit)="onSearch()"
       >
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-3 gap-8">
           <ngx-sirio-input
             name="name"
             ariaLabel="input"
             formControlName="name"
             validation
             [placeholder]="'SHARED.form.name.placeholder' | translate"
-            [label]="'SHARED.form.name.label' | translate"
+            [label]="nomeAttuale()"
             [canValidate]="searchForm.controls.name.touched ? true : false"
             [textFeedback]="
               searchForm.controls.name.valid ?

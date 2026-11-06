@@ -1,5 +1,5 @@
 [
-  { "id": "1", "descrizione": "Maschio" },
-  { "id": "2", "descrizione": "Femmina" },
+  { "id": "1", "descrizione": "Uomo" },
+  { "id": "2", "descrizione": "Donna" },
   { "id": "3", "descrizione": "Altro" }
 ]

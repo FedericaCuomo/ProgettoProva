@@ -2,7 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   inject,
-  signal,
+  input,
 } from '@angular/core';
 import { ProfileService } from '../../../../core/api-services/profilo/profilo.service';
 import { UserProfile } from '../../../../core/api-services/profilo/profilo.model';
@@ -15,13 +15,5 @@ import { UserProfile } from '../../../../core/api-services/profilo/profilo.model
 })
 export class UserCard {
   public profileService = inject(ProfileService);
-  user = signal<UserProfile | undefined>(undefined);
-
-  constructor() {
-    this.profileService.getUser().subscribe({
-      next: res => {
-        this.user.set(res);
-      },
-    });
-  }
+  user = input<UserProfile>();
 }

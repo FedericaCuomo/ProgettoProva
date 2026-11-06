@@ -1,16 +1,38 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  signal,
+  ChangeDetectionStrategy,
+  inject,
+} from '@angular/core';
 import { Hero } from './components/hero/hero';
 import { CardProfileComponent } from './components/card-profile/card-profile';
 import { UserCard } from './components/user-card/user-card';
 import { CardConfig, CardField } from './models/profile.model';
+import { Loader } from '../../shared/components/loader/loader';
+import { ProfileService } from '../../core/api-services/profilo/profilo.service';
+import { UserProfile } from '../../core/api-services/profilo/profilo.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-profile',
-  imports: [Hero, CardProfileComponent, UserCard],
+  imports: [Hero, CardProfileComponent, UserCard, Loader],
   templateUrl: './profile.html',
 })
 export class Profile {
+  isLoadingProfile = signal(false);
+  public profileService = inject(ProfileService);
+  user = signal<UserProfile | undefined>(undefined);
+
+  ngOnInit() {
+    this.isLoadingProfile.set(true);
+    this.profileService.getUser().subscribe({
+      next: res => {
+        this.user.set(res);
+        this.isLoadingProfile.set(false);
+      },
+    });
+  }
+
   datiAnagraficiFields = signal<CardField[]>([
     { key: 'nome', label: 'Nome ' },
     { key: 'cognome', label: 'Cognome ' },

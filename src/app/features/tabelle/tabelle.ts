@@ -32,7 +32,7 @@ import {
   SirioRadioGroupComponent,
 } from 'ngx-sirio-lib-20';
 import { AnagraficaForm } from './models/table.model';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
 import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
 
@@ -60,8 +60,18 @@ import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
   styleUrl: './tabelle.scss',
 })
 export class Tabelle implements OnInit {
+  public translate = inject(TranslateService);
   public testService = inject(TestService);
   public tipologicheService = inject(TipologicheService);
+
+  traduzioneProva = signal<string>('ciao');
+  nomeAttuale = computed<string>(() => {
+    const loading = this.isLoading();
+    const nome = loading ? 'sconosciuto' : 'federica';
+    return this.translate.instant('SHARED.form.name.label', {
+      nome,
+    });
+  });
 
   nazioniOptions = signal<Opzioni[]>([]);
   cityOptions = signal<Opzioni[]>([]);
@@ -130,6 +140,11 @@ export class Tabelle implements OnInit {
   });
 
   constructor() {
+    this.traduzioneProva.set(
+      this.translate.instant('SHARED.form.name.placeholder', {
+        nome: 'federica',
+      }),
+    );
     this.tipologicheService.getNazioni().subscribe({
       next: res => {
         this.nazioniOptions.set(res);
