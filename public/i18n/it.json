@@ -46,12 +46,16 @@
       "profile": "Profilo",
       "support": "Assistenza",
       "settings": "Impostazioni",
-      "tables": "Tabelle"
+      "tables": "Tabelle",
+      "test": "Prova"
     }
   },
 
   "tabelle-section": {
     "title": "Tabelle"
+  },
+  "test-section": {
+    "title": "Prova"
   },
 
   "home-section": {

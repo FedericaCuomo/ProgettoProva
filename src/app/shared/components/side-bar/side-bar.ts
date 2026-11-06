@@ -27,5 +27,6 @@ export class SideBar {
     { name: 'support', icon: 'fa-solid fa-circle-question', id: 'm5' },
     { name: 'settings', icon: 'fa-solid fa-gear', id: 'm6' },
     { name: 'tables', icon: 'fa-solid fa-table', id: 'm7' },
+    { name: 'test', icon: 'fa-solid fa-table', id: 'm8' },
   ];
 }

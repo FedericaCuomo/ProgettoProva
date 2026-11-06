@@ -42,9 +42,15 @@
           <ngx-sirio-datepicker
             name="date"
             formControlName="date"
+            validation
             labelPopover="La data non deve essere precedente al 1990"
             [placeholder]="'SHARED.form.date.placeholder' | translate"
             [label]="'SHARED.form.date.label' | translate"
+            [canValidate]="searchForm.controls.date.touched ? true : false"
+            [textFeedback]="
+              searchForm.controls.date.valid ? '' : 'La data è obbligatoria'
+            "
+            [showWhenValid]="true"
           />
 
           <ngx-sirio-select
@@ -70,8 +76,13 @@
 
           <ngx-sirio-select
             formControlName="city"
+            validation
             [label]="'SHARED.form.city.label' | translate"
             [placeholder]="'SHARED.form.city.placeholder' | translate"
+            [canValidate]="searchForm.controls.city.touched ? true : false"
+            [textFeedback]="
+              searchForm.controls.city.valid ? '' : 'La città è obbligatoria'
+            "
           >
             <ngx-sirio-select-panel ariaLabel="Elementi select">
               @for (city of cityOptions(); track city.id) {
@@ -97,16 +108,16 @@
         <!-- clickEvent con le tonde perchè Output -->
         <div class="flex justify-center gap-5">
           <ngx-sirio-button
-            type="submit"
-            color="primary"
-            [disabled]="searchForm.invalid || isLoading()"
-            >{{ 'SHARED.button.search' | translate }}</ngx-sirio-button
-          >
-          <ngx-sirio-button
             type="button"
             color="danger"
             (clickEvent)="onReset()"
             >{{ 'SHARED.button.cancel' | translate }}</ngx-sirio-button
+          >
+          <ngx-sirio-button
+            type="submit"
+            color="primary"
+            [disabled]="searchForm.invalid || isLoading()"
+            >{{ 'SHARED.button.search' | translate }}</ngx-sirio-button
           >
         </div>
       </form>
@@ -137,8 +148,8 @@
       />
     }
   </div>
-  <ngx-sirio-button type="button" color="danger" (clickEvent)="onLoad()">{{
+  <!-- <ngx-sirio-button type="button" color="danger" (clickEvent)="onLoad()">{{
     'SHARED.button.cancel' | translate
   }}</ngx-sirio-button>
-  <div>risposta: {{ text() }}</div>
+  <div>risposta: {{ text() }}</div> -->
 </div>

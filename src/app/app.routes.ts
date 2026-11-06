@@ -46,4 +46,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/tabelle/tabelle').then(m => m.Tabelle),
   },
+  {
+    path: 'test',
+    loadComponent: () => import('./features/prova/prova').then(m => m.Prova),
+  },
 ];

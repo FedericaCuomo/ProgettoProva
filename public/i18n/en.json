@@ -46,12 +46,16 @@
       "profile": "Profile",
       "support": "Support",
       "settings": "Settings",
-      "tables": "Tables"
+      "tables": "Tables",
+      "test": "Test"
     }
   },
 
   "tabelle-section": {
     "title": "Tables"
+  },
+  "test-section": {
+    "title": "Test"
   },
 
   "home-section": {
