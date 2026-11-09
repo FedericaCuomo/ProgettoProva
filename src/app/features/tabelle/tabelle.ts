@@ -35,6 +35,7 @@ import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
 import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
+import { tap } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -145,21 +146,39 @@ export class Tabelle implements OnInit {
         nome: 'federica',
       }),
     );
-    this.tipologicheService.getNazioni().subscribe({
-      next: res => {
-        this.nazioniOptions.set(res);
-      },
-    });
-    this.tipologicheService.getCitta().subscribe({
-      next: res => {
-        this.cityOptions.set(res);
-      },
-    });
-    this.tipologicheService.getGender().subscribe({
-      next: res => {
-        this.genderOptions.set(res);
-      },
-    });
+
+    // this.tipologicheService.getNazioni().subscribe({
+    //   next: res => {
+    //     this.nazioniOptions.set(res);
+    //   },
+    // });
+
+    this.tipologicheService
+      .getNazioni()
+      .pipe(
+        tap(res => {
+          this.nazioniOptions.set(res);
+        }),
+      )
+      .subscribe();
+
+    this.tipologicheService
+      .getCitta()
+      .pipe(
+        tap(res => {
+          this.cityOptions.set(res);
+        }),
+      )
+      .subscribe();
+
+    this.tipologicheService
+      .getGender()
+      .pipe(
+        tap(res => {
+          this.genderOptions.set(res);
+        }),
+      )
+      .subscribe();
   }
 
   ngOnInit(): void {
