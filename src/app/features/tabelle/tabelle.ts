@@ -19,7 +19,6 @@ import {
   SirioInputComponent,
   SirioDatepickerComponent,
   TableColumnConfig,
-  TableConfig,
   TableData,
   SirioButtonComponent,
   SirioAlertComponent,
@@ -31,7 +30,6 @@ import {
   SirioRadioButtonComponent,
   SirioRadioGroupComponent,
   SirioTableModule,
-  SirioTableComponent,
   SirioToastService,
 } from 'ngx-sirio-lib-20';
 import { AnagraficaForm } from './models/table.model';
@@ -59,7 +57,6 @@ import { catchError, of, tap } from 'rxjs';
     SirioRadioButtonComponent,
     SirioRadioGroupComponent,
     SirioTableModule,
-    SirioTableComponent,
   ],
   templateUrl: './tabelle.html',
   styleUrl: './tabelle.scss',
@@ -93,45 +90,16 @@ export class Tabelle implements OnInit {
     () => this.hasSearched() && !this.isLoading() && !this.errorDate(),
   );
 
-  // tabella
-  // tableDataSignal: TableData[] = [
-  //   { name: 'Jhon', surname: 'Smith', date: '02/08/1993' },
-  //   { name: 'Alice', surname: 'Brown', date: '17/02/1998' },
-  //   { name: 'Bob', surname: 'Johnson', date: '22/11/2000' },
-  // ];
+  displayedColumns = ['name', 'surname', 'date', 'nazioni', 'city', 'gender'];
 
   columnsDataSignal: TableColumnConfig[] = [
-    {
-      key: 'name',
-      title: this.translate.instant('tabelle-section.table.title.name'),
-    },
-    {
-      key: 'surname',
-      title: this.translate.instant('tabelle-section.table.title.surname'),
-    },
-    {
-      key: 'date',
-      title: this.translate.instant('tabelle-section.table.title.date'),
-    },
-    {
-      key: 'nazioni',
-      title: this.translate.instant('tabelle-section.table.title.nation'),
-    },
-    {
-      key: 'city',
-      title: this.translate.instant('tabelle-section.table.title.city'),
-    },
-    {
-      key: 'gender',
-      title: this.translate.instant('tabelle-section.table.title.gender'),
-    },
+    { key: 'name', title: 'tabelle-section.table.title.name' },
+    { key: 'surname', title: 'tabelle-section.table.title.surname' },
+    { key: 'date', title: 'tabelle-section.table.title.date' },
+    { key: 'nazioni', title: 'tabelle-section.table.title.nation' },
+    { key: 'city', title: 'tabelle-section.table.title.city' },
+    { key: 'gender', title: 'tabelle-section.table.title.gender' },
   ];
-
-  tableSetup = computed<TableConfig>(() => ({
-    data: this.tableDataSignal(),
-    columns: this.columnsDataSignal,
-  }));
-  // --fine tabella
 
   searchForm = new FormGroup<AnagraficaForm>({
     name: new FormControl<string | null>('', [
@@ -193,17 +161,6 @@ export class Tabelle implements OnInit {
     console.log('onInit');
   }
 
-  //  Metodo per gestire la risposta al servizio PROVA
-  // onLoad() {
-  //   this.isLoading.set(true);
-  //   this.testService.call().subscribe({
-  //     next: res => {
-  //       this.isLoading.set(false);
-  //       this.text.set(res.test);
-  //     },
-  //   });
-  // }
-
   onSearch() {
     this.hasSearched.set(true);
     this.isLoading.set(true);
@@ -233,16 +190,11 @@ export class Tabelle implements OnInit {
             type: 'danger',
             delay: 5000,
           });
-
+          // Restituisce un Observable che emette 'false' in caso di errore
           return of(false);
         }),
       )
       .subscribe();
-
-    // console.log('nome:', this.searchForm.controls.name.value);
-    // console.log('cognome:', this.searchForm.controls.surname.value);
-    // console.log('data:', this.searchForm.controls.date.value);
-    // console.log('form:', this.searchForm.value);
   }
 
   onReset() {
@@ -250,4 +202,15 @@ export class Tabelle implements OnInit {
     this.searchForm.reset();
     this.errorDate.set(false);
   }
+
+  //  Metodo per gestire la risposta al servizio PROVA
+  // onLoad() {
+  //   this.isLoading.set(true);
+  //   this.testService.call().subscribe({
+  //     next: res => {
+  //       this.isLoading.set(false);
+  //       this.text.set(res.test);
+  //     },
+  //   });
+  // }
 }

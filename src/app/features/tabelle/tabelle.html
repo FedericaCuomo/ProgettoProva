@@ -142,25 +142,23 @@
       </div>
     }
 
-    <!-- <ngx-sirio-table-container>
-      <table sirioTable [dataSource]="tableDataSignal()">
-        @for (col of columnsDataSignal; track col.key) {
-          <th>{{ 'tabelle-section.table.title.' + col.key | translate }}</th>
-          <td>{{ row[col.key] }}</td>
-        }
-      </table>
-    </ngx-sirio-table-container> -->
-    <!-- 
     @if (showTable()) {
-      <pre>
-        {{ tableDataSignal() | json }}
-      </pre>
-    } -->
-    @if (showTable()) {
-      <ngx-sirio-table
-        [data]="tableSetup().data"
-        [columns]="tableSetup().columns"
-      />
+      <ngx-sirio-table-container>
+        <table sirioTable [dataSource]="tableDataSignal()" [isDarkTheme]="true">
+          @for (col of columnsDataSignal; track col.key) {
+            <ng-container [sirioColumnDef]="col.key">
+              <th *sirioHeaderCellDef sirioHeaderCell>
+                {{ col.title | translate }}
+              </th>
+              <td *sirioCellDef="let element" sirioCell>
+                {{ element[col.key] }}
+              </td>
+            </ng-container>
+          }
+          <tr *sirioHeaderRowDef="displayedColumns" sirioHeaderRow></tr>
+          <tr *sirioRowDef="let row; columns: displayedColumns" sirioRow></tr>
+        </table>
+      </ngx-sirio-table-container>
     }
   </div>
   <!-- Button di prova -->

@@ -1,17 +1,19 @@
-<div class="flex min-h-full flex-col gap-10 bg-[#f7f9fb] p-3 px-5 pb-20">
+<div class="flex min-h-full flex-col gap-10 bg-[#f7f9fb] p-5 px-5 pb-20">
   <h1>{{ 'test-section.title' | translate }}</h1>
 
   <form
-    class="flex flex-col items-center justify-center gap-5 rounded-md bg-blue-100 p-3"
+    class="flex flex-col items-center justify-center gap-5 rounded-md bg-blue-100 p-7"
     [formGroup]="formProva"
   >
-    <div class="grid grid-cols-3 justify-center gap-5">
+    <div
+      class="flex flex-col items-center justify-center gap-7 sm:grid sm:grid-cols-3"
+    >
       <div>
         <label for="name">{{
           'SHARED.form.name.placeholder' | translate
         }}</label>
         <input
-          class="rounded-md border-2 border-amber-950 p-2"
+          class="rounded-md border-2 border-amber-950 bg-white p-2"
           id="name"
           type="text"
           formControlName="name"
@@ -24,40 +26,106 @@
         </label>
         <input
           id="surname"
-          class="rounded-md border-2 border-amber-950 p-2"
+          class="rounded-md border-2 border-amber-950 bg-white p-2"
           type="text"
           formControlName="surname"
           [placeholder]="'SHARED.form.surname.placeholder' | translate"
         />
       </div>
       <div>
-        <label for="surname">
-          {{ 'SHARED.form.surname.placeholder' | translate }}
-        </label>
+        <label for="date"> {{ 'SHARED.form.date.label' | translate }} </label>
         <input
-          id="surname"
-          class="rounded-md border-2 border-amber-950 p-2"
-          type="text"
-          formControlName="surname"
-          [placeholder]="'SHARED.form.surname.placeholder' | translate"
+          id="date"
+          class="rounded-md border-2 border-amber-950 bg-white p-2"
+          type="date"
+          formControlName="date"
+          [placeholder]="'SHARED.form.date.placeholder' | translate"
         />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="nazioni">{{
+          'SHARED.form.nation.label' | translate
+        }}</label>
+        <select
+          class="rounded-md border-2 border-amber-950 bg-white p-2"
+          name="nazioni"
+          id="nazioni"
+          formControlName="nazioni"
+        >
+          <option value="" disabled selected>
+            {{ 'SHARED.form.nation.placeholder' | translate }}
+          </option>
+          @for (nation of nazioniOptions(); track nation.id) {
+            <option [value]="nation.id">
+              {{ nation.descrizione }}
+            </option>
+          }
+        </select>
+      </div>
+      <div class="flex flex-col">
+        <label for="city">{{ 'SHARED.form.city.label' | translate }}</label>
+        <select
+          class="rounded-md border-2 border-amber-950 bg-white p-2"
+          name="city"
+          id="city"
+          formControlName="city"
+        >
+          <option value="" disabled selected>
+            {{ 'SHARED.form.city.placeholder' | translate }}
+          </option>
+          @for (city of cityOptions(); track city.id) {
+            <option [value]="city.id">{{ city.descrizione }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="gender">{{ 'SHARED.form.gender.label' | translate }}</label>
+        <div class="flex flex-col gap-3">
+          @for (gender of genderOptions(); track gender.id) {
+            <div class="justify-left flex items-center gap-4">
+              <input
+                type="radio"
+                formControlName="gender"
+                name="gender"
+                [id]="gender.id"
+                [value]="gender.id"
+              />
+              <label class="m-0" [for]="gender.id">{{
+                gender.descrizione
+              }}</label>
+            </div>
+          }
+        </div>
       </div>
     </div>
     <div class="flex gap-5">
       <button
         type="reset"
-        class="rounded-md bg-red-500 p-2"
+        class="w-25 rounded-md bg-red-500 p-2"
         (click)="onReset()"
       >
         {{ 'SHARED.button.cancel' | translate }}
       </button>
       <button
-        type="submit"
-        class="rounded-md bg-blue-500 p-2"
+        type="button"
+        class="w-25 rounded-md bg-blue-500 p-2 disabled:bg-gray-100"
         [disabled]="formProva.invalid"
+        (click)="onSearch()"
       >
         {{ 'SHARED.button.search' | translate }}
       </button>
     </div>
   </form>
+  @if (isSearched()) {
+    <ul>
+      @for (user of listData(); track user.name) {
+        <li>{{ user.name }}</li>
+        <!--<pre>
+        {{ listData() | json }}
+      </pre> -->
+      }
+    </ul>
+  }
 </div>
