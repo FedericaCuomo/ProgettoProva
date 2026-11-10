@@ -52,7 +52,17 @@
   },
 
   "tabelle-section": {
-    "title": "Tables"
+    "title": "Tables",
+    "table": {
+      "title": {
+        "name": "Name",
+        "surname": "Surname",
+        "date": "Date",
+        "nation": "Nation",
+        "city": "City",
+        "gender": "Gender"
+      }
+    }
   },
   "test-section": {
     "title": "Test"

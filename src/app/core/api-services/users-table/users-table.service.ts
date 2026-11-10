@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment.development';
 import { UserTable } from './users-table.model';
 
 @Injectable({ providedIn: 'root' })
-export class ProfileService {
+export class UsersTableService {
   private http = inject(HttpClient);
 
   getUsersTable(): Observable<UserTable[]> {

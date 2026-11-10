@@ -123,7 +123,7 @@
       </form>
     </div>
   </div>
-  @if (errorDate() === true) {
+  @if (errorDate()) {
     <ngx-sirio-alert type="error" labelClose="Chiudi messaggio di alert">
       <ngx-sirio-alert-message>
         <p>
@@ -134,20 +134,36 @@
     </ngx-sirio-alert>
   }
   <div>
-    @if (isLoading() === true) {
+    @if (isLoading()) {
       <div
         class="absolute inset-0 z-50 flex items-center justify-center bg-white/70"
       >
         <app-loader />
       </div>
     }
-    @if (showTable() === true) {
+
+    <!-- <ngx-sirio-table-container>
+      <table sirioTable [dataSource]="tableDataSignal()">
+        @for (col of columnsDataSignal; track col.key) {
+          <th>{{ 'tabelle-section.table.title.' + col.key | translate }}</th>
+          <td>{{ row[col.key] }}</td>
+        }
+      </table>
+    </ngx-sirio-table-container> -->
+    <!-- 
+    @if (showTable()) {
+      <pre>
+        {{ tableDataSignal() | json }}
+      </pre>
+    } -->
+    @if (showTable()) {
       <ngx-sirio-table
-        [data]="tableSetup.data"
-        [columns]="tableSetup.columns"
+        [data]="tableSetup().data"
+        [columns]="tableSetup().columns"
       />
     }
   </div>
+  <!-- Button di prova -->
   <!-- <ngx-sirio-button type="button" color="danger" (clickEvent)="onLoad()">{{
     'SHARED.button.cancel' | translate
   }}</ngx-sirio-button>

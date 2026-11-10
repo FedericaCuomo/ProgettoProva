@@ -1,3 +1,4 @@
+import { UsersTableService } from './../../core/api-services/users-table/users-table.service';
 import { TipologicheService } from './../../core/api-services/tipologiche/tipologiche.service';
 import { TestService } from './../../core/api-services/test-api/test-api.service';
 import {
@@ -17,7 +18,6 @@ import {
 import {
   SirioInputComponent,
   SirioDatepickerComponent,
-  SirioTableComponent,
   TableColumnConfig,
   TableConfig,
   TableData,
@@ -30,12 +30,15 @@ import {
   SirioSelectOptionComponent,
   SirioRadioButtonComponent,
   SirioRadioGroupComponent,
+  SirioTableModule,
+  SirioTableComponent,
+  SirioToastService,
 } from 'ngx-sirio-lib-20';
 import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
 import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,7 +48,6 @@ import { tap } from 'rxjs';
     ReactiveFormsModule,
     TranslatePipe,
     SirioDatepickerComponent,
-    SirioTableComponent,
     SirioButtonComponent,
     SirioAlertComponent,
     SirioAlertMessageComponent,
@@ -56,6 +58,8 @@ import { tap } from 'rxjs';
     SirioSelectOptionComponent,
     SirioRadioButtonComponent,
     SirioRadioGroupComponent,
+    SirioTableModule,
+    SirioTableComponent,
   ],
   templateUrl: './tabelle.html',
   styleUrl: './tabelle.scss',
@@ -64,6 +68,8 @@ export class Tabelle implements OnInit {
   public translate = inject(TranslateService);
   public testService = inject(TestService);
   public tipologicheService = inject(TipologicheService);
+  public UsersTableService = inject(UsersTableService);
+  readonly toastService = inject(SirioToastService);
 
   traduzioneProva = signal<string>('ciao');
   nomeAttuale = computed<string>(() => {
@@ -77,52 +83,54 @@ export class Tabelle implements OnInit {
   nazioniOptions = signal<Opzioni[]>([]);
   cityOptions = signal<Opzioni[]>([]);
   genderOptions = signal<Opzioni[]>([]);
+  tableDataSignal = signal<TableData[]>([]);
   text = signal<string>('');
   hasSearched = signal<boolean>(false);
   isLoading = signal<boolean>(false);
   errorDate = signal<boolean>(false);
+  errorServiceTable = signal<boolean>(false);
   showTable = computed<boolean>(
     () => this.hasSearched() && !this.isLoading() && !this.errorDate(),
   );
 
   // tabella
-  tableDataSignal: TableData[] = [
-    {
-      name: 'Jhon',
-      surname: 'Smith',
-      date: '02/08/1993',
-    },
-    {
-      name: 'Alice',
-      surname: 'Brown',
-      date: '17/02/1998',
-    },
-    {
-      name: 'Bob',
-      surname: 'Johnson',
-      date: '22/11/2000',
-    },
-  ];
+  // tableDataSignal: TableData[] = [
+  //   { name: 'Jhon', surname: 'Smith', date: '02/08/1993' },
+  //   { name: 'Alice', surname: 'Brown', date: '17/02/1998' },
+  //   { name: 'Bob', surname: 'Johnson', date: '22/11/2000' },
+  // ];
 
   columnsDataSignal: TableColumnConfig[] = [
     {
       key: 'name',
-      title: 'Name',
+      title: this.translate.instant('tabelle-section.table.title.name'),
     },
     {
       key: 'surname',
-      title: 'Surname',
+      title: this.translate.instant('tabelle-section.table.title.surname'),
     },
     {
       key: 'date',
-      title: 'Date',
+      title: this.translate.instant('tabelle-section.table.title.date'),
+    },
+    {
+      key: 'nazioni',
+      title: this.translate.instant('tabelle-section.table.title.nation'),
+    },
+    {
+      key: 'city',
+      title: this.translate.instant('tabelle-section.table.title.city'),
+    },
+    {
+      key: 'gender',
+      title: this.translate.instant('tabelle-section.table.title.gender'),
     },
   ];
 
-  tableSetup: TableConfig = {
-    data: this.tableDataSignal,
+  tableSetup = computed<TableConfig>(() => ({
+    data: this.tableDataSignal(),
     columns: this.columnsDataSignal,
-  };
+  }));
   // --fine tabella
 
   searchForm = new FormGroup<AnagraficaForm>({
@@ -137,7 +145,7 @@ export class Tabelle implements OnInit {
     date: new FormControl<string | null>('', [Validators.required]),
     nazioni: new FormControl<string | null>('', [Validators.required]),
     city: new FormControl<string | null>('', [Validators.required]),
-    gender: new FormControl<string | null>(''),
+    gender: new FormControl<string | null>('', [Validators.required]),
   });
 
   constructor() {
@@ -185,15 +193,16 @@ export class Tabelle implements OnInit {
     console.log('onInit');
   }
 
-  onLoad() {
-    this.isLoading.set(true);
-    this.testService.call().subscribe({
-      next: res => {
-        this.isLoading.set(false);
-        this.text.set(res.test);
-      },
-    });
-  }
+  //  Metodo per gestire la risposta al servizio PROVA
+  // onLoad() {
+  //   this.isLoading.set(true);
+  //   this.testService.call().subscribe({
+  //     next: res => {
+  //       this.isLoading.set(false);
+  //       this.text.set(res.test);
+  //     },
+  //   });
+  // }
 
   onSearch() {
     this.hasSearched.set(true);
@@ -212,10 +221,28 @@ export class Tabelle implements OnInit {
       }
     }, 3000);
 
-    console.log('nome:', this.searchForm.controls.name.value);
-    console.log('cognome:', this.searchForm.controls.surname.value);
-    console.log('data:', this.searchForm.controls.date.value);
-    console.log('form:', this.searchForm.value);
+    this.UsersTableService.getUsersTable()
+      .pipe(
+        tap(res => {
+          this.tableDataSignal.set(res);
+        }),
+        catchError(() => {
+          this.toastService.openToast({
+            title: 'Errore',
+            text: 'Non è stato possibile contattare il server',
+            type: 'danger',
+            delay: 5000,
+          });
+
+          return of(false);
+        }),
+      )
+      .subscribe();
+
+    // console.log('nome:', this.searchForm.controls.name.value);
+    // console.log('cognome:', this.searchForm.controls.surname.value);
+    // console.log('data:', this.searchForm.controls.date.value);
+    // console.log('form:', this.searchForm.value);
   }
 
   onReset() {

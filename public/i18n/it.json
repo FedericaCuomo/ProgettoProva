@@ -52,7 +52,17 @@
   },
 
   "tabelle-section": {
-    "title": "Tabelle"
+    "title": "Tabelle",
+    "table": {
+      "title": {
+        "name": "Nome",
+        "surname": "Cognome",
+        "date": "Data",
+        "nation": "Nazione",
+        "city": "Città",
+        "gender": "Genere"
+      }
+    }
   },
   "test-section": {
     "title": "Prova"
