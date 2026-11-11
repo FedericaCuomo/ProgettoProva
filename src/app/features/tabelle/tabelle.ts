@@ -7,7 +7,6 @@ import {
   signal,
   computed,
   inject,
-  OnInit,
 } from '@angular/core';
 import {
   FormControl,
@@ -36,7 +35,7 @@ import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
 import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, EMPTY, finalize, of, tap } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,21 +60,12 @@ import { catchError, of, tap } from 'rxjs';
   templateUrl: './tabelle.html',
   styleUrl: './tabelle.scss',
 })
-export class Tabelle implements OnInit {
+export class Tabelle {
   public translate = inject(TranslateService);
   public testService = inject(TestService);
   public tipologicheService = inject(TipologicheService);
   public UsersTableService = inject(UsersTableService);
   readonly toastService = inject(SirioToastService);
-
-  traduzioneProva = signal<string>('ciao');
-  nomeAttuale = computed<string>(() => {
-    const loading = this.isLoading();
-    const nome = loading ? 'sconosciuto' : 'federica';
-    return this.translate.instant('SHARED.form.name.label', {
-      nome,
-    });
-  });
 
   nazioniOptions = signal<Opzioni[]>([]);
   cityOptions = signal<Opzioni[]>([]);
@@ -87,7 +77,11 @@ export class Tabelle implements OnInit {
   errorDate = signal<boolean>(false);
   errorServiceTable = signal<boolean>(false);
   showTable = computed<boolean>(
-    () => this.hasSearched() && !this.isLoading() && !this.errorDate(),
+    () =>
+      this.hasSearched() &&
+      !this.isLoading() &&
+      !this.errorDate() &&
+      this.tableDataSignal().length > 0,
   );
 
   displayedColumns = ['name', 'surname', 'date', 'nazioni', 'city', 'gender'];
@@ -117,18 +111,6 @@ export class Tabelle implements OnInit {
   });
 
   constructor() {
-    this.traduzioneProva.set(
-      this.translate.instant('SHARED.form.name.placeholder', {
-        nome: 'federica',
-      }),
-    );
-
-    // this.tipologicheService.getNazioni().subscribe({
-    //   next: res => {
-    //     this.nazioniOptions.set(res);
-    //   },
-    // });
-
     this.tipologicheService
       .getNazioni()
       .pipe(
@@ -157,27 +139,23 @@ export class Tabelle implements OnInit {
       .subscribe();
   }
 
-  ngOnInit(): void {
-    console.log('onInit');
-  }
-
   onSearch() {
     this.hasSearched.set(true);
-    this.isLoading.set(true);
     this.errorDate.set(false);
-    setTimeout(() => {
-      this.isLoading.set(false);
 
-      const dateForm = this.searchForm.controls.date.value?.split('/');
-      if (dateForm) {
-        if (Number(dateForm[2]) < 1990) {
-          this.errorDate.set(true);
-        } else {
-          this.errorDate.set(false);
-        }
+    const dateForm = this.searchForm.controls.date.value?.split('/');
+    if (dateForm) {
+      if (Number(dateForm[2]) < 1990) {
+        this.errorDate.set(true);
+      } else {
+        this.errorDate.set(false);
+        this.isLoading.set(true);
+        this.getUsersTable();
       }
-    }, 3000);
+    }
+  }
 
+  getUsersTable() {
     this.UsersTableService.getUsersTable()
       .pipe(
         tap(res => {
@@ -191,8 +169,9 @@ export class Tabelle implements OnInit {
             delay: 5000,
           });
           // Restituisce un Observable che emette 'false' in caso di errore
-          return of(false);
+          return of(EMPTY);
         }),
+        finalize(() => this.isLoading.set(false)),
       )
       .subscribe();
   }
@@ -202,15 +181,4 @@ export class Tabelle implements OnInit {
     this.searchForm.reset();
     this.errorDate.set(false);
   }
-
-  //  Metodo per gestire la risposta al servizio PROVA
-  // onLoad() {
-  //   this.isLoading.set(true);
-  //   this.testService.call().subscribe({
-  //     next: res => {
-  //       this.isLoading.set(false);
-  //       this.text.set(res.test);
-  //     },
-  //   });
-  // }
 }

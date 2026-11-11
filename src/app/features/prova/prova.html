@@ -5,15 +5,13 @@
     class="flex flex-col items-center justify-center gap-5 rounded-md bg-blue-100 p-7"
     [formGroup]="formProva"
   >
-    <div
-      class="flex flex-col items-center justify-center gap-7 sm:grid sm:grid-cols-3"
-    >
+    <div class="flex w-full flex-col gap-7 sm:grid sm:grid-cols-3">
       <div>
         <label for="name">{{
           'SHARED.form.name.placeholder' | translate
         }}</label>
         <input
-          class="rounded-md border-2 border-amber-950 bg-white p-2"
+          class="w-full rounded-md border-2 border-amber-950 bg-white p-2"
           id="name"
           type="text"
           formControlName="name"
@@ -26,7 +24,7 @@
         </label>
         <input
           id="surname"
-          class="rounded-md border-2 border-amber-950 bg-white p-2"
+          class="w-full rounded-md border-2 border-amber-950 bg-white p-2"
           type="text"
           formControlName="surname"
           [placeholder]="'SHARED.form.surname.placeholder' | translate"
@@ -36,7 +34,7 @@
         <label for="date"> {{ 'SHARED.form.date.label' | translate }} </label>
         <input
           id="date"
-          class="rounded-md border-2 border-amber-950 bg-white p-2"
+          class="w-full rounded-md border-2 border-amber-950 bg-white p-2"
           type="date"
           formControlName="date"
           [placeholder]="'SHARED.form.date.placeholder' | translate"
@@ -120,7 +118,7 @@
   </form>
   @if (isSearched()) {
     <ul>
-      @for (user of listData(); track user.name) {
+      @for (user of listData(); track user.id) {
         <li>{{ user.name }}</li>
         <!--<pre>
         {{ listData() | json }}

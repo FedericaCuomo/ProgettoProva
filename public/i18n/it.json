@@ -16,7 +16,7 @@
     "form": {
       "name": {
         "placeholder": "Inserisci nome",
-        "label": "Nome {{nome}}"
+        "label": "Nome"
       },
       "surname": {
         "placeholder": "Inserisci cognome",

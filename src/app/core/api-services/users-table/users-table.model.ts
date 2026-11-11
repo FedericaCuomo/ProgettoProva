@@ -1,4 +1,5 @@
 export type UserTable = {
+  id: number;
   name: string;
   surname: string;
   date: string;

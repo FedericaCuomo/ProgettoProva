@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Federica",
     "surname": "Cuomo",
     "date": "22/11/2000",
@@ -8,6 +9,7 @@
     "gender": "Donna"
   },
   {
+    "id": 2,
     "name": "Mario",
     "surname": "Rossi",
     "date": "05/07/1993",
@@ -16,6 +18,7 @@
     "gender": "Uomo"
   },
   {
+    "id": 3,
     "name": "Federica",
     "surname": "Cuomo",
     "date": "22/11/2000",

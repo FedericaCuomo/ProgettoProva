@@ -1,5 +1,6 @@
 <div class="flex min-h-full flex-col gap-10 bg-[#f7f9fb] p-3 px-5 pb-20">
   <h1>{{ 'tabelle-section.title' | translate }}</h1>
+
   <div class="flex justify-center">
     <div class="rounded-2xl bg-blue-100 p-5">
       <form
@@ -14,7 +15,7 @@
             formControlName="name"
             validation
             [placeholder]="'SHARED.form.name.placeholder' | translate"
-            [label]="nomeAttuale()"
+            [label]="'SHARED.form.name.label' | translate"
             [canValidate]="searchForm.controls.name.touched ? true : false"
             [textFeedback]="
               searchForm.controls.name.valid ?
@@ -159,11 +160,12 @@
           <tr *sirioRowDef="let row; columns: displayedColumns" sirioRow></tr>
         </table>
       </ngx-sirio-table-container>
+    } @else {
+      <ngx-sirio-alert type="info" labelClose="Chiudi messaggio di info">
+        <ngx-sirio-alert-message>
+          <p><strong>Info:</strong> Nessun dato disponibile.</p>
+        </ngx-sirio-alert-message>
+      </ngx-sirio-alert>
     }
   </div>
-  <!-- Button di prova -->
-  <!-- <ngx-sirio-button type="button" color="danger" (clickEvent)="onLoad()">{{
-    'SHARED.button.cancel' | translate
-  }}</ngx-sirio-button>
-  <div>risposta: {{ text() }}</div> -->
 </div>
