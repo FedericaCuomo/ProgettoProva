@@ -12,4 +12,6 @@ import { Layout } from './core/layout/layout';
   templateUrl: './app.html',
   imports: [Layout],
 })
-export class App {}
+export class App {
+  // readonly coreStore = inject(CoreStore);
+}

@@ -9,8 +9,7 @@ import { CardProfileComponent } from './components/card-profile/card-profile';
 import { UserCard } from './components/user-card/user-card';
 import { CardConfig, CardField } from './models/profile.model';
 import { Loader } from '../../shared/components/loader/loader';
-import { ProfileService } from '../../core/api-services/profilo/profilo.service';
-import { UserProfile } from '../../core/api-services/profilo/profilo.model';
+import { CoreStore } from '../../core/store/core.store';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,19 +18,22 @@ import { UserProfile } from '../../core/api-services/profilo/profilo.model';
   templateUrl: './profile.html',
 })
 export class Profile {
-  isLoadingProfile = signal(false);
-  public profileService = inject(ProfileService);
-  user = signal<UserProfile | undefined>(undefined);
+  readonly coreStore = inject(CoreStore);
 
-  ngOnInit() {
-    this.isLoadingProfile.set(true);
-    this.profileService.getUser().subscribe({
-      next: res => {
-        this.user.set(res);
-        this.isLoadingProfile.set(false);
-      },
-    });
-  }
+  // user = computed(() => this.coreStore.userInfo());
+
+  // ngOnInit() {
+  //   // console.log('core store:', this.coreStore.userInfo());
+
+  //   this.isLoadingProfile.set(true);
+  //   this.profileService.getUser().subscribe({
+  //     next: res => {
+  //       this.user.set(res);
+  //       this.isLoadingProfile.set(false);
+  //       // console.log('user info profile:', this.user());
+  //     },
+  //   });
+  // }
 
   datiAnagraficiFields = signal<CardField[]>([
     { key: 'nome', label: 'Nome ' },

@@ -1,3 +1,4 @@
+import { CoreStore } from './../../core/store/core.store';
 import { ProfileService } from './../../core/api-services/profilo/profilo.service';
 import { UsersTableService } from './../../core/api-services/users-table/users-table.service';
 import { TipologicheService } from './../../core/api-services/tipologiche/tipologiche.service';
@@ -37,7 +38,6 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
 import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
 import { catchError, EMPTY, finalize, of, tap } from 'rxjs';
-import { UserProfile } from '../../core/api-services/profilo/profilo.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,8 +69,9 @@ export class Tabelle {
   public usersTableService = inject(UsersTableService);
   public profileService = inject(ProfileService);
   readonly toastService = inject(SirioToastService);
+  readonly coreStore = inject(CoreStore);
 
-  user = signal<UserProfile | null>(null);
+  // user = signal<UserProfile | null>(null);
   nazioniOptions = signal<Opzioni[]>([]);
   cityOptions = signal<Opzioni[]>([]);
   genderOptions = signal<Opzioni[]>([]);
@@ -115,15 +116,6 @@ export class Tabelle {
   });
 
   constructor() {
-    this.profileService
-      .getUser()
-      .pipe(
-        tap(res => {
-          this.user.set(res);
-        }),
-      )
-      .subscribe();
-
     this.tipologicheService
       .getNazioni()
       .pipe(

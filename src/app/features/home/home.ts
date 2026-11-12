@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Hero } from './components/hero/hero';
 import { Services } from './components/services/services';
+import { CoreStore } from '../../core/store/core.store';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,6 +10,7 @@ import { Services } from './components/services/services';
   templateUrl: './home.html',
 })
 export class Home {
+  readonly coreStore = inject(CoreStore);
   search = '';
 
   onSerach(value: string) {

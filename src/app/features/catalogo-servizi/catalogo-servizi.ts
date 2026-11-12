@@ -7,6 +7,7 @@ import { SirioButtonComponent, SirioDialogService } from 'ngx-sirio-lib-20';
 import { ServiziForniti } from '../../shared/services/servizi-forniti';
 import { AddServiceForm } from './components/add-service-form/add-service-form';
 import { ServicesType } from '../../shared/models/services.model';
+import { CoreStore } from '../../core/store/core.store';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +16,8 @@ import { ServicesType } from '../../shared/models/services.model';
   templateUrl: './catalogo-servizi.html',
 })
 export class CatalogoServizi {
+  readonly coreStore = inject(CoreStore);
+
   private serviziService = inject(ServiziForniti);
   private dialogService = inject(SirioDialogService);
 
