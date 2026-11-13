@@ -168,7 +168,13 @@
                     {{ col.title | translate }}
                   </th>
                   <td *sirioCellDef="let element" sirioCell>
-                    {{ element[col.key] }}
+                    @if (col.key === 'details') {
+                      <button type="button" (click)="openDetails()">
+                        <span class="fas fa-calendar"></span>
+                      </button>
+                    } @else {
+                      {{ element[col.key] }}
+                    }
                   </td>
                 </ng-container>
               }

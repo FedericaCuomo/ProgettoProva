@@ -35,8 +35,8 @@ import {
 } from 'ngx-sirio-lib-20';
 import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { Loader } from '../../shared/components/loader/loader';
 import { UserTableRequest } from '../../core/api-services/users-table/users-table.model';
+import { Router } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,7 +49,6 @@ import { UserTableRequest } from '../../core/api-services/users-table/users-tabl
     SirioButtonComponent,
     SirioAlertComponent,
     SirioAlertMessageComponent,
-    Loader,
     SirioValidationDirective,
     SirioSelectComponent,
     SirioSelectPanelComponent,
@@ -60,9 +59,9 @@ import { UserTableRequest } from '../../core/api-services/users-table/users-tabl
   ],
   providers: [TabelleStore],
   templateUrl: './tabelle.html',
-  styleUrl: './tabelle.scss',
 })
 export class Tabelle {
+  public router = inject(Router);
   public translate = inject(TranslateService);
   public testService = inject(TestService);
   public tipologicheService = inject(TipologicheService);
@@ -83,7 +82,15 @@ export class Tabelle {
   errorServiceTable = signal<boolean>(false);
   showTable = computed<boolean>(() => this.hasSearched() && !this.errorDate());
 
-  displayedColumns = ['name', 'surname', 'date', 'nazioni', 'city', 'gender'];
+  displayedColumns = [
+    'name',
+    'surname',
+    'date',
+    'nazioni',
+    'city',
+    'gender',
+    'details',
+  ];
 
   columnsDataSignal: TableColumnConfig[] = [
     { key: 'name', title: 'tabelle-section.table.title.name' },
@@ -92,6 +99,7 @@ export class Tabelle {
     { key: 'nazioni', title: 'tabelle-section.table.title.nation' },
     { key: 'city', title: 'tabelle-section.table.title.city' },
     { key: 'gender', title: 'tabelle-section.table.title.gender' },
+    { key: 'details', title: 'tabelle-section.table.title.details' },
   ];
 
   searchForm = new FormGroup<AnagraficaForm>({
@@ -136,6 +144,10 @@ export class Tabelle {
         this.tabelleStore.loadUsersTable(requestData);
       }
     }
+  }
+
+  openDetails() {
+    this.router.navigate(['/tables/details']);
   }
 
   onReset() {

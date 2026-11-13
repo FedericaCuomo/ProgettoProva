@@ -60,7 +60,8 @@
         "date": "Data",
         "nation": "Nazione",
         "city": "Città",
-        "gender": "Genere"
+        "gender": "Genere",
+        "details": "Dettagli"
       }
     }
   },

@@ -43,8 +43,8 @@ export const routes: Routes = [
   },
   {
     path: 'tables',
-    loadComponent: () =>
-      import('./features/tabelle/tabelle').then(m => m.Tabelle),
+    loadChildren: () =>
+      import('./features/tabelle/tabelle.routes').then(m => m.TABELLE_ROUTES),
   },
   {
     path: 'test',
