@@ -267,16 +267,24 @@
         },
         {
           "uuid": "7de812a1-ea0f-4d40-8196-2607559ac214",
-          "body": "{}",
+          "body": "{\n  \"error\":\"errore\"\n}",
           "latency": 0,
           "statusCode": 500,
           "label": "",
           "headers": [],
           "bodyType": "INLINE",
-          "filePath": "",
+          "filePath": "./users-table.mock.json",
           "databucketID": "",
           "sendFileAsBody": false,
-          "rules": [],
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "name",
+              "value": "ERRORE",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,

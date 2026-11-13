@@ -1,3 +1,4 @@
+import { TabelleStore } from './store/tabelle.store';
 import { CoreStore } from './../../core/store/core.store';
 import { ProfileService } from './../../core/api-services/profilo/profilo.service';
 import { UsersTableService } from './../../core/api-services/users-table/users-table.service';
@@ -20,7 +21,6 @@ import {
   SirioInputComponent,
   SirioDatepickerComponent,
   TableColumnConfig,
-  TableData,
   SirioButtonComponent,
   SirioAlertComponent,
   SirioAlertMessageComponent,
@@ -36,8 +36,7 @@ import {
 import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Loader } from '../../shared/components/loader/loader';
-import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
-import { catchError, EMPTY, finalize, of, tap } from 'rxjs';
+import { UserTableRequest } from '../../core/api-services/users-table/users-table.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,6 +58,7 @@ import { catchError, EMPTY, finalize, of, tap } from 'rxjs';
     SirioRadioGroupComponent,
     SirioTableModule,
   ],
+  providers: [TabelleStore],
   templateUrl: './tabelle.html',
   styleUrl: './tabelle.scss',
 })
@@ -70,24 +70,18 @@ export class Tabelle {
   public profileService = inject(ProfileService);
   readonly toastService = inject(SirioToastService);
   readonly coreStore = inject(CoreStore);
+  readonly tabelleStore = inject(TabelleStore);
 
-  // user = signal<UserProfile | null>(null);
-  nazioniOptions = signal<Opzioni[]>([]);
-  cityOptions = signal<Opzioni[]>([]);
-  genderOptions = signal<Opzioni[]>([]);
-  tableDataSignal = signal<TableData[]>([]);
+  nazioniOptions = computed(() => this.tabelleStore.nazioniOptions());
+  cityOptions = computed(() => this.tabelleStore.cityOptions());
+  genderOptions = computed(() => this.tabelleStore.genderOptions());
+  tableDataSignal = computed(() => this.tabelleStore.usersTable());
+
   text = signal<string>('');
   hasSearched = signal<boolean>(false);
-  isLoading = signal<boolean>(false);
   errorDate = signal<boolean>(false);
   errorServiceTable = signal<boolean>(false);
-  showTable = computed<boolean>(
-    () =>
-      this.hasSearched() &&
-      !this.isLoading() &&
-      !this.errorDate() &&
-      this.tableDataSignal().length > 0,
-  );
+  showTable = computed<boolean>(() => this.hasSearched() && !this.errorDate());
 
   displayedColumns = ['name', 'surname', 'date', 'nazioni', 'city', 'gender'];
 
@@ -115,35 +109,6 @@ export class Tabelle {
     gender: new FormControl<string | null>('', [Validators.required]),
   });
 
-  constructor() {
-    this.tipologicheService
-      .getNazioni()
-      .pipe(
-        tap(res => {
-          this.nazioniOptions.set(res);
-        }),
-      )
-      .subscribe();
-
-    this.tipologicheService
-      .getCitta()
-      .pipe(
-        tap(res => {
-          this.cityOptions.set(res);
-        }),
-      )
-      .subscribe();
-
-    this.tipologicheService
-      .getGender()
-      .pipe(
-        tap(res => {
-          this.genderOptions.set(res);
-        }),
-      )
-      .subscribe();
-  }
-
   onSearch() {
     this.hasSearched.set(true);
     this.errorDate.set(false);
@@ -154,32 +119,23 @@ export class Tabelle {
         this.errorDate.set(true);
       } else {
         this.errorDate.set(false);
-        this.isLoading.set(true);
-        this.getUsersTable();
+
+        const { name, surname, date, nazioni, city, gender } =
+          this.searchForm.value;
+        // console.log('form Value:', this.searchForm.value);
+        // console.log('form Value name:', this.searchForm.value.name);
+
+        const requestData: UserTableRequest = {
+          name: name || '',
+          surname: surname || '',
+          date: date || '',
+          nazioni: nazioni || '',
+          city: city || '',
+          gender: gender || '',
+        };
+        this.tabelleStore.loadUsersTable(requestData);
       }
     }
-  }
-
-  getUsersTable() {
-    this.usersTableService
-      .getUsersTable()
-      .pipe(
-        tap(res => {
-          this.tableDataSignal.set(res);
-        }),
-        catchError(() => {
-          this.toastService.openToast({
-            title: 'Errore',
-            text: 'Non è stato possibile contattare il server',
-            type: 'danger',
-            delay: 5000,
-          });
-          // Restituisce un Observable che emette 'false' in caso di errore
-          return of(EMPTY);
-        }),
-        finalize(() => this.isLoading.set(false)),
-      )
-      .subscribe();
   }
 
   onReset() {

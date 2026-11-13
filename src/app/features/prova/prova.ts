@@ -15,7 +15,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AnagraficaForm } from '../tabelle/models/table.model';
 import { Opzioni } from '../../core/api-services/tipologiche/tipologiche.model';
 import { TipologicheService } from '../../core/api-services/tipologiche/tipologiche.service';
-import { catchError, of, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { UserTable } from '../../core/api-services/users-table/users-table.model';
 import { SirioToastService } from 'ngx-sirio-lib-20';
 
@@ -99,23 +99,23 @@ export class Prova {
     console.log(this.formProva.controls.city.value);
     console.log(this.formProva.controls.gender.value);
 
-    this.usersTableService
-      .getUsersTable()
-      .pipe(
-        tap(res => {
-          this.listData.set(res);
-        }),
-        catchError(() => {
-          this.toastService.openToast({
-            title: 'Errore',
-            text: 'Non è stato possibile contattare il server',
-            type: 'danger',
-            delay: 5000,
-          });
-          // Restituisce un Observable che emette 'false' in caso di errore
-          return of(false);
-        }),
-      )
-      .subscribe();
+    // this.usersTableService
+    //   .getUsersTable()
+    //   .pipe(
+    //     tap(res => {
+    //       this.listData.set(res);
+    //     }),
+    //     catchError(() => {
+    //       this.toastService.openToast({
+    //         title: 'Errore',
+    //         text: 'Non è stato possibile contattare il server',
+    //         type: 'danger',
+    //         delay: 5000,
+    //       });
+    //       // Restituisce un Observable che emette 'false' in caso di errore
+    //       return of(false);
+    //     }),
+    //   )
+    //   .subscribe();
   }
 }

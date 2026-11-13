@@ -39,8 +39,6 @@ export const CoreStore = signalStore(
         switchMap(() =>
           profileService.getUser().pipe(
             tap(response => {
-              console.log('response core store:', response);
-
               updateState(store, 'Load profile - success', {
                 userInfo: response,
               });

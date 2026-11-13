@@ -1,4 +1,5 @@
 @let userInfo = coreStore.userInfo();
+@let tableLoading = tabelleStore.usersLoading();
 <div class="flex min-h-full flex-col gap-10 bg-[#f7f9fb] p-3 px-5 pb-20">
   <h1>{{ 'tabelle-section.title' | translate }}</h1>
   <h2>Ciao {{ userInfo?.nome }}</h2>
@@ -119,7 +120,7 @@
           <ngx-sirio-button
             type="submit"
             color="primary"
-            [disabled]="searchForm.invalid || isLoading()"
+            [disabled]="searchForm.invalid || tableLoading"
             >{{ 'SHARED.button.search' | translate }}</ngx-sirio-button
           >
         </div>
@@ -137,37 +138,49 @@
     </ngx-sirio-alert>
   }
   <div>
-    @if (isLoading()) {
+    <!-- @if (tableLoading) {
       <div
         class="absolute inset-0 z-50 flex items-center justify-center bg-white/70"
       >
         <app-loader />
       </div>
-    }
+    } -->
 
     @if (showTable()) {
-      <ngx-sirio-table-container>
-        <table sirioTable [dataSource]="tableDataSignal()" [isDarkTheme]="true">
-          @for (col of columnsDataSignal; track col.key) {
-            <ng-container [sirioColumnDef]="col.key">
-              <th *sirioHeaderCellDef sirioHeaderCell>
-                {{ col.title | translate }}
-              </th>
-              <td *sirioCellDef="let element" sirioCell>
-                {{ element[col.key] }}
-              </td>
-            </ng-container>
-          }
-          <tr *sirioHeaderRowDef="displayedColumns" sirioHeaderRow></tr>
-          <tr *sirioRowDef="let row; columns: displayedColumns" sirioRow></tr>
-        </table>
-      </ngx-sirio-table-container>
-    } @else {
-      <ngx-sirio-alert type="info" labelClose="Chiudi messaggio di info">
-        <ngx-sirio-alert-message>
-          <p><strong>Info:</strong> Nessun dato disponibile.</p>
-        </ngx-sirio-alert-message>
-      </ngx-sirio-alert>
+      @if (tableDataSignal().length === 0 && !tableLoading) {
+        <ngx-sirio-alert type="info" labelClose="Chiudi messaggio di info">
+          <ngx-sirio-alert-message>
+            <p><strong>Info:</strong> Nessun dato disponibile.</p>
+          </ngx-sirio-alert-message>
+        </ngx-sirio-alert>
+      } @else {
+        @if (tableDataSignal()) {
+          <ngx-sirio-table-container>
+            <table
+              sirioTable
+              [isLoading]="tableLoading"
+              [dataSource]="tableDataSignal()"
+              [isDarkTheme]="true"
+            >
+              @for (col of columnsDataSignal; track col.key) {
+                <ng-container [sirioColumnDef]="col.key">
+                  <th *sirioHeaderCellDef sirioHeaderCell>
+                    {{ col.title | translate }}
+                  </th>
+                  <td *sirioCellDef="let element" sirioCell>
+                    {{ element[col.key] }}
+                  </td>
+                </ng-container>
+              }
+              <tr *sirioHeaderRowDef="displayedColumns" sirioHeaderRow></tr>
+              <tr
+                *sirioRowDef="let row; columns: displayedColumns"
+                sirioRow
+              ></tr>
+            </table>
+          </ngx-sirio-table-container>
+        }
+      }
     }
   </div>
 </div>
