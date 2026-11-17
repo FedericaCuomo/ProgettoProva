@@ -57,7 +57,6 @@ import { Router } from '@angular/router';
     SirioRadioGroupComponent,
     SirioTableModule,
   ],
-  providers: [TabelleStore],
   templateUrl: './tabelle.html',
 })
 export class Tabelle {
@@ -146,8 +145,8 @@ export class Tabelle {
     }
   }
 
-  openDetails() {
-    this.router.navigate(['/tables/details']);
+  openDetails(element: Record<string, unknown>) {
+    this.router.navigate(['/tables/details', element['id']]);
   }
 
   onReset() {

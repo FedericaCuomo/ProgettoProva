@@ -12,7 +12,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 
 type CoreState = {
-  userInfo: UserProfile | undefined;
+  userInfo: UserProfile | undefined; 
 };
 
 const initialState: CoreState = {

@@ -12,7 +12,7 @@ export const TABELLE_ROUTES: Routes = [
         loadComponent: () => import('./tabelle').then(m => m.Tabelle),
       },
       {
-        path: 'details',
+        path: 'details/:id',
         loadComponent: () =>
           import('./pages/tabelle-dettaglio/tabelle-dettaglio').then(
             m => m.TabelleDettaglio,
