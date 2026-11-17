@@ -1,0 +1,13 @@
+{
+  "id": 3,
+  "nome": "Elisa",
+  "cognome": "Esposito",
+  "codiceFiscale": "CMFUBEUIF38392",
+  "cittaResidenza": "Napoli",
+  "luogoNascita": "Torino",
+  "dataNascita": "22/12/2000",
+  "indirizzoResidenza": "Corso Francia 79",
+  "statoCivile": "coniugato",
+  "mail": "mario.rossi@gmail.com",
+  "telefono": "3336243038"
+}

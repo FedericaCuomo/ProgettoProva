@@ -296,6 +296,99 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "54e880d1-7283-457c-bc5d-f7056d80a5a6",
+      "type": "http",
+      "documentation": "Example route: remove or replace it",
+      "method": "get",
+      "endpoint": "getUserProfile/:idUser",
+      "responses": [
+        {
+          "uuid": "e547d513-b9a9-4058-900c-15ef60e73b58",
+          "body": "{\n  \"error\": \"Internal server error\"\n}",
+          "latency": 3000,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "FILE",
+          "filePath": "./user-profile-1.mock.json",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "idUser",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "93790bc7-7424-422d-89aa-68351028ae43",
+          "body": "{\n  \"error\":\"errore\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "FILE",
+          "filePath": "./user-profile-2.mock.json",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "idUser",
+              "value": "2",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "6ffb6532-c652-4bf1-aa05-1c2500c18ea0",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "FILE",
+          "filePath": "./user-profile-3.mock.json",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "idUser",
+              "value": "3",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -322,6 +415,10 @@
     {
       "type": "route",
       "uuid": "d1063ea2-6b23-46a9-9c26-328af8d11fd1"
+    },
+    {
+      "type": "route",
+      "uuid": "54e880d1-7283-457c-bc5d-f7056d80a5a6"
     }
   ],
   "proxyMode": false,

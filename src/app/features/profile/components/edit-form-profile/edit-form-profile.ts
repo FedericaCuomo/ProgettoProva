@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {
-  FormControl,
-  Validators,
+  // FormControl,
+  // Validators,
   ɵInternalFormsSharedModule,
 } from '@angular/forms';
 import {
@@ -50,22 +50,22 @@ export class EditProfileDialog extends SirioDialogElement {
   }
 
   // senza ngoninit i dati passati dal padre (this.profileData) potrebbero non essere ancora pronti
-  ngOnInit(): void {
-    // serve per creare dinamicamente il formGroup.
-    // Record serve a definire la forma di un oggetto specificando che tipo di chiavi e valori conterrà
-    const formControlsConfig: Record<string, FormControl<string | null>> = {};
+  // ngOnInit(): void {
+  //   // serve per creare dinamicamente il formGroup.
+  //   // Record serve a definire la forma di un oggetto specificando che tipo di chiavi e valori conterrà
+  //   const formControlsConfig: Record<string, FormControl<string | null>> = {};
 
-    // dai dati che entrano in input iteriamo sui campi della card e stampiamo il valore legato allo stesso campo dell'utente
-    this.profileData.cardFields.forEach(field => {
-      const currentValue = this.profileData.user[field.key] || '';
-      formControlsConfig[field.key] = new FormControl(currentValue, {
-        validators: [Validators.required],
-      });
-    });
+  //   // dai dati che entrano in input iteriamo sui campi della card e stampiamo il valore legato allo stesso campo dell'utente
+  //   this.profileData.cardFields.forEach(field => {
+  //     const currentValue = this.profileData.user[field.key] || '';
+  //     formControlsConfig[field.key] = new FormControl(currentValue, {
+  //       validators: [Validators.required],
+  //     });
+  //   });
 
-    // Angular crea automaticamente il form completo, collegando ogni input al suo rispettivo controllo, senza scrivere a mano il codice
-    this.form = new FormGroup(formControlsConfig);
-  }
+  //   // Angular crea automaticamente il form completo, collegando ogni input al suo rispettivo controllo, senza scrivere a mano il codice
+  //   this.form = new FormGroup(formControlsConfig);
+  // }
 
   closeEvent() {
     this.sirioDialogService.closeDialog();

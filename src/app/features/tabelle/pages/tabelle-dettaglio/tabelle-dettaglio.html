@@ -1,3 +1,15 @@
-<!-- <div>id ricevuto: {{ id }}</div> -->
-<h1>Dettagli di {{ user()?.['name'] }}</h1>
-<div></div>
+<h1>Dettagli di {{ userInfo()?.nome }} {{ userInfo()?.cognome }}</h1>
+<div>Informazioni personali</div>
+<div>{{ userInfo()?.cittaResidenza }}</div>
+<div>{{ userInfo()?.luogoNascita }}</div>
+<div>{{ userInfo()?.dataNascita }}</div>
+<div>{{ userInfo()?.indirizzoResidenza }}</div>
+<div>{{ userInfo()?.statoCivile }}</div>
+
+<ngx-sirio-button
+  style="margin-right: 1em"
+  color="primary"
+  label="Label bottone"
+  icon="fas fa-arrow-left"
+  (clickEvent)="back()"
+/>

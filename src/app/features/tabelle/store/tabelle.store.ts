@@ -12,13 +12,20 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 import { Opzioni } from '../../../core/api-services/tipologiche/tipologiche.model';
 import { SirioToastService, TableData } from 'ngx-sirio-lib-20';
-import { UserTableRequest } from '../../../core/api-services/users-table/users-table.model';
+import {
+  UserTable,
+  UserTableRequest,
+} from '../../../core/api-services/users-table/users-table.model';
+import { UserProfile } from '../../../core/api-services/profilo/profilo.model';
 
 type TabelleState = {
   nazioniOptions: Opzioni[];
   genderOptions: Opzioni[];
   cityOptions: Opzioni[];
   usersTable: TableData[];
+  selectedRow: UserTable | undefined;
+  userInfo: UserProfile | undefined;
+  nameFormValue: string | null;
 };
 
 const initialState: TabelleState = {
@@ -26,12 +33,15 @@ const initialState: TabelleState = {
   genderOptions: [],
   cityOptions: [],
   usersTable: [],
+  selectedRow: undefined,
+  userInfo: undefined,
+  nameFormValue: null,
 };
 
 export const TabelleStore = signalStore(
   withState(initialState),
   withCallState({
-    collections: ['nazioni', 'city', 'gender', 'users'],
+    collections: ['nazioni', 'city', 'gender', 'users', 'userDetails'],
   }),
 
   withMethods(
@@ -154,11 +164,77 @@ export const TabelleStore = signalStore(
         ),
       );
 
+      const setSelectedRow = (row: UserTable) => {
+        updateState(store, 'Set selected row', {
+          selectedRow: row,
+        });
+      };
+
+      const loadUserDetails = rxMethod<void>(
+        pipe(
+          tap(() =>
+            updateState(
+              store,
+              'Load user details - loading',
+              setLoading('userDetails'),
+            ),
+          ),
+          switchMap(() => {
+            const idUser = store.selectedRow()?.id;
+
+            if (!idUser) {
+              updateState(
+                store,
+                'Load user details - loaded',
+                setLoaded('userDetails'),
+              );
+              return EMPTY;
+            }
+
+            return usersTableService.getUserDetail(idUser).pipe(
+              tap(response => {
+                updateState(store, 'Load user details - success', {
+                  userInfo: response,
+                });
+              }),
+              catchError(() => {
+                updateState(store, 'Load user details - error', {
+                  userInfo: undefined,
+                });
+                toastService.openToast({
+                  title: 'Errore',
+                  text: 'Non è stato possibile contattare il server',
+                  type: 'danger',
+                  delay: 5000,
+                });
+                return EMPTY;
+              }),
+              finalize(() =>
+                updateState(
+                  store,
+                  'Load user details - loaded',
+                  setLoaded('userDetails'),
+                ),
+              ),
+            );
+          }),
+        ),
+      );
+
+      const setNameFormValue = (name: string) => {
+        updateState(store, 'Set selected row', {
+          nameFormValue: name,
+        });
+      };
+
       return {
         loadNazioniOptions,
         loadCityOptions,
         loadGenderOptions,
         loadUsersTable,
+        loadUserDetails,
+        setSelectedRow,
+        setNameFormValue,
       };
     },
   ),

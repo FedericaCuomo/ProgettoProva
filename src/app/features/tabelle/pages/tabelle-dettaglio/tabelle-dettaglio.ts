@@ -4,28 +4,28 @@ import {
   inject,
   computed,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { TabelleStore } from '../../store/tabelle.store';
+import { SirioButtonComponent } from 'ngx-sirio-lib-20';
+import { Router } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-tabelle-dettaglio',
-  imports: [],
+  imports: [SirioButtonComponent],
   templateUrl: './tabelle-dettaglio.html',
 })
 export class TabelleDettaglio {
-  private route = inject(ActivatedRoute);
+  public router = inject(Router);
+
   readonly tabelleStore = inject(TabelleStore);
 
-  tableDataSignal = computed(() => this.tabelleStore.usersTable());
+  userInfo = computed(() => this.tabelleStore.userInfo());
 
-  // route  rappresenta l'url corrente.
-  // snapshot è un'istantanea dello stato della rotta nel momento in cui il componente viene caricato.
-  // paramMap raccoglie tutti i parametri dinamici presenti nell'URL
-  // get('id') è il metodo che estrae effettivamente il valore
-  id: string | null = this.route.snapshot.paramMap.get('id');
+  constructor() {
+    this.tabelleStore.loadUserDetails();
+  }
 
-  user = computed(() =>
-    this.tableDataSignal().find(user => String(user['id']) === String(this.id)),
-  );
+  back() {
+    this.router.navigate(['/tables']);
+  }
 }

@@ -35,7 +35,10 @@ import {
 } from 'ngx-sirio-lib-20';
 import { AnagraficaForm } from './models/table.model';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { UserTableRequest } from '../../core/api-services/users-table/users-table.model';
+import {
+  UserTable,
+  UserTableRequest,
+} from '../../core/api-services/users-table/users-table.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -74,6 +77,7 @@ export class Tabelle {
   cityOptions = computed(() => this.tabelleStore.cityOptions());
   genderOptions = computed(() => this.tabelleStore.genderOptions());
   tableDataSignal = computed(() => this.tabelleStore.usersTable());
+  nameForm = computed(() => this.tabelleStore.nameFormValue());
 
   text = signal<string>('');
   hasSearched = signal<boolean>(false);
@@ -116,9 +120,24 @@ export class Tabelle {
     gender: new FormControl<string | null>('', [Validators.required]),
   });
 
+  ngOnInit() {
+    // riassegno il valore salvato nello store nel form ogni volta che entro nella pagina
+    const savedName = this.tabelleStore.nameFormValue();
+    if (savedName) {
+      this.searchForm.controls.name.setValue(savedName);
+    }
+  }
+
   onSearch() {
+    // alla ricerca riassegno il valore del nome
+    const nomeCorrente = this.searchForm.controls.name.value;
     this.hasSearched.set(true);
     this.errorDate.set(false);
+
+    if (nomeCorrente) {
+      this.tabelleStore.setNameFormValue(nomeCorrente);
+    }
+    console.log(this.nameForm());
 
     const dateForm = this.searchForm.controls.date.value?.split('/');
     if (dateForm) {
@@ -129,8 +148,6 @@ export class Tabelle {
 
         const { name, surname, date, nazioni, city, gender } =
           this.searchForm.value;
-        // console.log('form Value:', this.searchForm.value);
-        // console.log('form Value name:', this.searchForm.value.name);
 
         const requestData: UserTableRequest = {
           name: name || '',
@@ -145,7 +162,9 @@ export class Tabelle {
     }
   }
 
-  openDetails(element: Record<string, unknown>) {
+  openDetails(element: UserTable) {
+    this.tabelleStore.setSelectedRow(element);
+
     this.router.navigate(['/tables/details', element['id']]);
   }
 
