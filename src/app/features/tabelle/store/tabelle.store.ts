@@ -25,7 +25,7 @@ type TabelleState = {
   usersTable: TableData[];
   selectedRow: UserTable | undefined;
   userInfo: UserProfile | undefined;
-  nameFormValue: string | null;
+  nameFormValue: string | undefined;
 };
 
 const initialState: TabelleState = {
@@ -35,7 +35,7 @@ const initialState: TabelleState = {
   usersTable: [],
   selectedRow: undefined,
   userInfo: undefined,
-  nameFormValue: null,
+  nameFormValue: undefined,
 };
 
 export const TabelleStore = signalStore(
@@ -226,7 +226,6 @@ export const TabelleStore = signalStore(
           nameFormValue: name,
         });
       };
-
       return {
         loadNazioniOptions,
         loadCityOptions,
