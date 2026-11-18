@@ -2,7 +2,8 @@
   "SHARED": {
     "button": {
       "search": "Cerca",
-      "cancel": "Annulla"
+      "cancel": "Annulla",
+      "back": "Torna indietro"
     },
     "select": {
       "placeHolder": {

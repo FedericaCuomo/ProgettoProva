@@ -25,7 +25,8 @@ type TabelleState = {
   usersTable: TableData[];
   selectedRow: UserTable | undefined;
   userInfo: UserProfile | undefined;
-  nameFormValue: string | undefined;
+  formValuesBackup: UserTableRequest | undefined;
+  hasSearched: boolean;
 };
 
 const initialState: TabelleState = {
@@ -35,7 +36,8 @@ const initialState: TabelleState = {
   usersTable: [],
   selectedRow: undefined,
   userInfo: undefined,
-  nameFormValue: undefined,
+  formValuesBackup: undefined,
+  hasSearched: false,
 };
 
 export const TabelleStore = signalStore(
@@ -164,9 +166,17 @@ export const TabelleStore = signalStore(
         ),
       );
 
-      const setSelectedRow = (row: UserTable) => {
+      const setHasSearched = (hasSearched: boolean) => {
+        updateState(store, 'Set has searched', {
+          // hasSearched: hasSearched,
+          hasSearched,
+        });
+      };
+
+      const setSelectedRow = (selectedRow: UserTable) => {
         updateState(store, 'Set selected row', {
-          selectedRow: row,
+          // selectedRow: selectedRow
+          selectedRow,
         });
       };
 
@@ -221,9 +231,9 @@ export const TabelleStore = signalStore(
         ),
       );
 
-      const setNameFormValue = (name: string) => {
-        updateState(store, 'Set selected row', {
-          nameFormValue: name,
+      const setFormValues = (values: UserTableRequest) => {
+        updateState(store, 'set Form Values', {
+          formValuesBackup: values,
         });
       };
       return {
@@ -233,7 +243,8 @@ export const TabelleStore = signalStore(
         loadUsersTable,
         loadUserDetails,
         setSelectedRow,
-        setNameFormValue,
+        setFormValues,
+        setHasSearched,
       };
     },
   ),

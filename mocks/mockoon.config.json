@@ -22,7 +22,7 @@
           "statusCode": 500,
           "label": "Error response",
           "headers": [],
-          "bodyType": "INLINE",
+          "bodyType": "FILE",
           "filePath": "",
           "databucketID": "",
           "sendFileAsBody": false,
@@ -334,7 +334,7 @@
         {
           "uuid": "93790bc7-7424-422d-89aa-68351028ae43",
           "body": "{\n  \"error\":\"errore\"\n}",
-          "latency": 0,
+          "latency": 3000,
           "statusCode": 200,
           "label": "",
           "headers": [],
@@ -361,7 +361,7 @@
         {
           "uuid": "6ffb6532-c652-4bf1-aa05-1c2500c18ea0",
           "body": "{}",
-          "latency": 0,
+          "latency": 3000,
           "statusCode": 200,
           "label": "",
           "headers": [],

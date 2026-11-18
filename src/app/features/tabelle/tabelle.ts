@@ -61,6 +61,7 @@ import { Router } from '@angular/router';
     SirioTableModule,
   ],
   templateUrl: './tabelle.html',
+  providers: [TabelleStore],
 })
 export class Tabelle {
   public router = inject(Router);
@@ -77,10 +78,9 @@ export class Tabelle {
   cityOptions = computed(() => this.tabelleStore.cityOptions());
   genderOptions = computed(() => this.tabelleStore.genderOptions());
   tableDataSignal = computed(() => this.tabelleStore.usersTable());
-  nameForm = computed(() => this.tabelleStore.nameFormValue());
+  hasSearched = computed(() => this.tabelleStore.hasSearched());
 
   text = signal<string>('');
-  hasSearched = signal<boolean>(false);
   errorDate = signal<boolean>(false);
   errorServiceTable = signal<boolean>(false);
   showTable = computed<boolean>(() => this.hasSearched() && !this.errorDate());
@@ -122,22 +122,15 @@ export class Tabelle {
 
   ngOnInit() {
     // riassegno il valore salvato nello store nel form ogni volta che entro nella pagina
-    const savedName = this.tabelleStore.nameFormValue();
-    if (savedName) {
-      this.searchForm.controls.name.setValue(savedName);
+    const savedFormValues = this.tabelleStore.formValuesBackup();
+    if (savedFormValues) {
+      this.searchForm.patchValue(savedFormValues);
     }
   }
 
   onSearch() {
-    // alla ricerca riassegno il valore del nome
-    const nomeCorrente = this.searchForm.controls.name.value;
-    this.hasSearched.set(true);
+    this.tabelleStore.setHasSearched(true);
     this.errorDate.set(false);
-
-    if (nomeCorrente) {
-      this.tabelleStore.setNameFormValue(nomeCorrente);
-    }
-    console.log(this.nameForm());
 
     const dateForm = this.searchForm.controls.date.value?.split('/');
     if (dateForm) {
@@ -158,18 +151,19 @@ export class Tabelle {
           gender: gender || '',
         };
         this.tabelleStore.loadUsersTable(requestData);
+        // alla ricerca riassegno il valore dei campi
+        this.tabelleStore.setFormValues(requestData);
       }
     }
   }
 
   openDetails(element: UserTable) {
     this.tabelleStore.setSelectedRow(element);
-
     this.router.navigate(['/tables/details', element['id']]);
   }
 
   onReset() {
-    this.hasSearched.set(false);
+    this.tabelleStore.setHasSearched(false);
     this.searchForm.reset();
     this.errorDate.set(false);
   }
