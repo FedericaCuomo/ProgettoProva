@@ -14,6 +14,7 @@ import {
 } from 'ngx-sirio-lib-20';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { languageOption } from './configs/select-option.configs';
+import { CoreStore } from '../../../core/store/core.store';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,10 +29,19 @@ import { languageOption } from './configs/select-option.configs';
   ],
 })
 export class Header {
+  readonly coreStore = inject(CoreStore);
+
   private translate = inject(TranslateService);
   currentLanguage = signal<string>('it');
   readonly isItalian = computed(() => this.currentLanguage() === 'it');
   readonly languageOption = languageOption;
+
+  // Inserito nel coreStore
+  // readonly fullname = computed(() => {
+  //   const nome = this.coreStore.userInfo()?.nome;
+  //   const cognome = this.coreStore.userInfo()?.cognome;
+  //   return nome && cognome ? nome + ' ' + cognome : 'no data';
+  // });
 
   constructor() {
     this.translate.use(this.currentLanguage());

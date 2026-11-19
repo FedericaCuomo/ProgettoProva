@@ -1,9 +1,9 @@
-import { TabelleStore } from './store/tabelle.store';
-import { CoreStore } from './../../core/store/core.store';
-import { ProfileService } from './../../core/api-services/profilo/profilo.service';
-import { UsersTableService } from './../../core/api-services/users-table/users-table.service';
-import { TipologicheService } from './../../core/api-services/tipologiche/tipologiche.service';
-import { TestService } from './../../core/api-services/test-api/test-api.service';
+import { TabelleStore } from '../../store/tabelle.store';
+import { CoreStore } from '../../../../core/store/core.store';
+import { ProfileService } from '../../../../core/api-services/profilo/profilo.service';
+import { UsersTableService } from '../../../../core/api-services/users-table/users-table.service';
+import { TipologicheService } from '../../../../core/api-services/tipologiche/tipologiche.service';
+import { TestService } from '../../../../core/api-services/test-api/test-api.service';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -33,12 +33,12 @@ import {
   SirioTableModule,
   SirioToastService,
 } from 'ngx-sirio-lib-20';
-import { AnagraficaForm } from './models/table.model';
+import { AnagraficaForm } from '../../models/table.model';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
   UserTable,
   UserTableRequest,
-} from '../../core/api-services/users-table/users-table.model';
+} from '../../../../core/api-services/users-table/users-table.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -61,7 +61,6 @@ import { Router } from '@angular/router';
     SirioTableModule,
   ],
   templateUrl: './tabelle.html',
-  providers: [TabelleStore],
 })
 export class Tabelle {
   public router = inject(Router);

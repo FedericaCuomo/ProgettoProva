@@ -1,5 +1,11 @@
 import { UserProfile } from '../api-services/profilo/profilo.model';
-import { signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
+import {
+  signalStore,
+  withComputed,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import {
   setLoaded,
   setLoading,
@@ -7,12 +13,12 @@ import {
   withCallState,
 } from '@angular-architects/ngrx-toolkit';
 import { ProfileService } from '../api-services/profilo/profilo.service';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 
 type CoreState = {
-  userInfo: UserProfile | undefined; 
+  userInfo: UserProfile | undefined;
 };
 
 const initialState: CoreState = {
@@ -24,6 +30,15 @@ export const CoreStore = signalStore(
   withState(initialState),
   withCallState({
     collections: ['profilo'],
+  }),
+
+  withComputed(store => {
+    const fullname = computed(() => {
+      const nome = store.userInfo()?.nome;
+      const cognome = store.userInfo()?.cognome;
+      return nome && cognome ? nome + ' ' + cognome : 'no data';
+    });
+    return { fullname };
   }),
 
   withMethods((store, profileService = inject(ProfileService)) => {

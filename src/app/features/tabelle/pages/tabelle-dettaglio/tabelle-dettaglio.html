@@ -19,11 +19,11 @@
       <h1>Dettagli di {{ userInfo()?.nome }} {{ userInfo()?.cognome }}</h1>
       <h2>Informazioni personali</h2>
       <div class="flex flex-col gap-2">
-        <p>{{ userInfo()?.cittaResidenza }}</p>
-        <p>{{ userInfo()?.luogoNascita }}</p>
-        <p>{{ userInfo()?.dataNascita }}</p>
-        <p>{{ userInfo()?.indirizzoResidenza }}</p>
-        <p>{{ userInfo()?.statoCivile }}</p>
+        <p>Città di residenza: {{ userInfo()?.cittaResidenza }}</p>
+        <p>Luogo di nascita: {{ userInfo()?.luogoNascita }}</p>
+        <p>Data di nascita: {{ userInfo()?.dataNascita }}</p>
+        <p>Indirizzo di residenza{{ userInfo()?.indirizzoResidenza }}</p>
+        <p>Stato civile: {{ userInfo()?.statoCivile }}</p>
       </div>
     </div>
   </div>

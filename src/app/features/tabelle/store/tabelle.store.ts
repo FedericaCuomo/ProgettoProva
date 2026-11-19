@@ -41,6 +41,7 @@ const initialState: TabelleState = {
 };
 
 export const TabelleStore = signalStore(
+  // { providedIn: 'root' },
   withState(initialState),
   withCallState({
     collections: ['nazioni', 'city', 'gender', 'users', 'userDetails'],
@@ -142,8 +143,11 @@ export const TabelleStore = signalStore(
           switchMap(params =>
             usersTableService.getUsersTable(params).pipe(
               tap(response => {
+                const usersFinal = response.find(
+                  user => user.name === params.name,
+                );
                 updateState(store, 'Load users - success', {
-                  usersTable: response,
+                  usersTable: usersFinal ? [usersFinal] : response,
                 });
               }),
               catchError(() => {

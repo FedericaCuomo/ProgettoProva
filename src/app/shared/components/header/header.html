@@ -7,7 +7,9 @@
   <div class="flex items-center gap-4 select-none">
     <div class="fa-solid fa-bell"></div>
     <div class="fa-solid fa-circle-user"></div>
-    <div routerLink="profilo">Mario Rossi</div>
+    <div routerLink="profilo">
+      {{ coreStore.fullname() }}
+    </div>
     <ngx-sirio-select [value]="currentLanguage()">
       <ngx-sirio-select-panel
         ariaLabel="Elementi select"

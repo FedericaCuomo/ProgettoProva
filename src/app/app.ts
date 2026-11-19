@@ -2,8 +2,10 @@ import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
+  inject,
 } from '@angular/core';
 import { Layout } from './core/layout/layout';
+import { CoreStore } from './core/store/core.store';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,5 +15,5 @@ import { Layout } from './core/layout/layout';
   imports: [Layout],
 })
 export class App {
-  // readonly coreStore = inject(CoreStore);
+  readonly coreStore = inject(CoreStore);
 }

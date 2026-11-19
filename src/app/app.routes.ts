@@ -43,9 +43,14 @@ export const routes: Routes = [
   },
   {
     path: 'tables',
+    loadComponent: () =>
+      import('./features/tabelle/tabelle-home').then(
+        m => m.TabelleHomeComponent,
+      ),
     loadChildren: () =>
       import('./features/tabelle/tabelle.routes').then(m => m.TABELLE_ROUTES),
   },
+
   {
     path: 'test',
     loadComponent: () => import('./features/prova/prova').then(m => m.Prova),
