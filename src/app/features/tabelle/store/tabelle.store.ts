@@ -144,10 +144,13 @@ export const TabelleStore = signalStore(
             usersTableService.getUsersTable(params).pipe(
               tap(response => {
                 const usersFinal = response.find(
-                  user => user.name === params.name,
+                  user =>
+                    user.name === params.name ||
+                    user.surname === params.surname,
                 );
+
                 updateState(store, 'Load users - success', {
-                  usersTable: usersFinal ? [usersFinal] : response,
+                  usersTable: usersFinal ? [usersFinal] : [],
                 });
               }),
               catchError(() => {

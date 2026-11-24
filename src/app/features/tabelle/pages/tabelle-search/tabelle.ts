@@ -94,7 +94,7 @@ export class Tabelle {
     'details',
   ];
 
-  columnsDataSignal: TableColumnConfig[] = [
+  columnsData: TableColumnConfig[] = [
     { key: 'name', title: 'tabelle-section.table.title.name' },
     { key: 'surname', title: 'tabelle-section.table.title.surname' },
     { key: 'date', title: 'tabelle-section.table.title.date' },

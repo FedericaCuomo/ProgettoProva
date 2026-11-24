@@ -74,6 +74,20 @@
       }
     }
   },
+
+  "tabelle-dettaglio-section": {
+    "title": "Details of",
+    "subtitle": "Personal information",
+    "informazioni": {
+      "cittaResidenza": "City of residence",
+      "luogoNascita": "Place of birth",
+      "dataNascita": "Date of birth",
+      "indirizzoResidenza": "Residential address",
+      "statoCivile": "Marital status",
+      "mail": "Mail",
+      "phone": "Phone number"
+    }
+  },
   "test-section": {
     "title": "Test"
   },

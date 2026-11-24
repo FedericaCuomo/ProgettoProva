@@ -74,6 +74,20 @@
       }
     }
   },
+
+  "tabelle-dettaglio-section": {
+    "title": "Dettagli di",
+    "subtitle": "Informazioni personali",
+    "informazioni": {
+      "cittaResidenza": "Città di residenza",
+      "luogoNascita": "Luogo di nascita",
+      "dataNascita": "Data di nascita",
+      "indirizzoResidenza": "Indirizzo di Residenza",
+      "statoCivile": "Stato Civile",
+      "mail": "Mail",
+      "phone": "Numero di telefono"
+    }
+  },
   "test-section": {
     "title": "Prova"
   },

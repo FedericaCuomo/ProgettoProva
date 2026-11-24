@@ -16,14 +16,19 @@
     </div>
 
     <div>
-      <h1>Dettagli di {{ userInfo()?.nome }} {{ userInfo()?.cognome }}</h1>
-      <h2>Informazioni personali</h2>
+      <h1>
+        {{ 'tabelle-dettaglio-section.title' | translate }}
+        {{ userInfo()?.nome }}
+        {{ userInfo()?.cognome }}
+      </h1>
+      <h2>{{ 'tabelle-dettaglio-section.subtitle' | translate }}</h2>
       <div class="flex flex-col gap-2">
-        <p>Città di residenza: {{ userInfo()?.cittaResidenza }}</p>
-        <p>Luogo di nascita: {{ userInfo()?.luogoNascita }}</p>
-        <p>Data di nascita: {{ userInfo()?.dataNascita }}</p>
-        <p>Indirizzo di residenza{{ userInfo()?.indirizzoResidenza }}</p>
-        <p>Stato civile: {{ userInfo()?.statoCivile }}</p>
+        @for (info of userDetails; track info.key) {
+          <p>
+            <strong>{{ info.title | translate }}: </strong
+            >{{ userInfo()?.[info.key] }}
+          </p>
+        }
       </div>
     </div>
   </div>

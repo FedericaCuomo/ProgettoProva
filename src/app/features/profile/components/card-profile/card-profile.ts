@@ -42,4 +42,6 @@ export class CardProfileComponent {
   //       }
   //     });
   // }
+
+  // onEdit() {}
 }

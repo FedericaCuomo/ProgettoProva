@@ -9,6 +9,7 @@ import { SirioButtonComponent } from 'ngx-sirio-lib-20';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Loader } from '../../../../shared/components/loader/loader';
+import { UserProfile } from '../../../../core/api-services/profilo/profilo.model';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +22,37 @@ export class TabelleDettaglio {
   readonly tabelleStore = inject(TabelleStore);
 
   userInfo = computed(() => this.tabelleStore.userInfo());
+
+  userDetails: { key: keyof UserProfile; title: string }[] = [
+    {
+      key: 'cittaResidenza',
+      title: 'tabelle-dettaglio-section.informazioni.cittaResidenza',
+    },
+    {
+      key: 'luogoNascita',
+      title: 'tabelle-dettaglio-section.informazioni.luogoNascita',
+    },
+    {
+      key: 'dataNascita',
+      title: 'tabelle-dettaglio-section.informazioni.dataNascita',
+    },
+    {
+      key: 'indirizzoResidenza',
+      title: 'tabelle-dettaglio-section.informazioni.indirizzoResidenza',
+    },
+    {
+      key: 'statoCivile',
+      title: 'tabelle-dettaglio-section.informazioni.statoCivile',
+    },
+    {
+      key: 'mail',
+      title: 'tabelle-dettaglio-section.informazioni.mail',
+    },
+    {
+      key: 'telefono',
+      title: 'tabelle-dettaglio-section.informazioni.phone',
+    },
+  ];
 
   constructor() {
     this.tabelleStore.loadUserDetails();

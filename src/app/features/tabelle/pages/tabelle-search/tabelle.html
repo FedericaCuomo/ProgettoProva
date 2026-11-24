@@ -162,7 +162,7 @@
               [dataSource]="tableDataSignal()"
               [isDarkTheme]="true"
             >
-              @for (col of columnsDataSignal; track col.key) {
+              @for (col of columnsData; track col.key) {
                 <ng-container [sirioColumnDef]="col.key">
                   <th *sirioHeaderCellDef sirioHeaderCell>
                     {{ col.title | translate }}
