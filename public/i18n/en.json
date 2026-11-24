@@ -38,6 +38,14 @@
       "gender": {
         "placeholder": "Enter gender",
         "label": "Gender"
+      },
+      "mail": {
+        "placeholder": "Enter mail",
+        "label": "Mail"
+      },
+      "cf": {
+        "placeholder": "Enter CF",
+        "label": "CF"
       }
     },
     "side-bar": {

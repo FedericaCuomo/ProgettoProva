@@ -97,6 +97,31 @@
           }
         </div>
       </div>
+
+      <!-- mail -->
+      <div>
+        <label for="mail"> {{ 'SHARED.form.mail.label' | translate }} </label>
+        <input
+          id="mail"
+          class="w-full rounded-md border-2 border-amber-950 bg-white p-2"
+          type="text"
+          formControlName="mail"
+          [placeholder]="'SHARED.form.mail.placeholder' | translate"
+        />
+      </div>
+      <!-- cf -->
+      <div>
+        <label for="cf"> {{ 'SHARED.form.cf.label' | translate }} </label>
+        <input
+          id="cf"
+          class="w-full rounded-md border-2 border-amber-950 bg-white p-2"
+          type="text"
+          formControlName="cf"
+          [placeholder]="'SHARED.form.cf.placeholder' | translate"
+        />
+      </div>
+
+      <!-- altro -->
     </div>
     <div class="flex gap-5">
       <button

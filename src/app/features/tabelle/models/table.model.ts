@@ -8,3 +8,13 @@ export type AnagraficaForm = {
   city: FormControl<string | null>;
   gender: FormControl<string | null>;
 };
+export type AnagraficaFormPRova = {
+  name: FormControl<string | null>;
+  surname: FormControl<string | null>;
+  date: FormControl<string | null>;
+  nazioni: FormControl<string | null>;
+  city: FormControl<string | null>;
+  gender: FormControl<string | null>;
+  mail: FormControl<string | null>;
+  cf: FormControl<string | null>;
+};

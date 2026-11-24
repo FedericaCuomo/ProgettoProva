@@ -38,6 +38,14 @@
       "gender": {
         "placeholder": "Inserisci il genere",
         "label": "Genere"
+      },
+      "mail": {
+        "placeholder": "Inserisci la mail",
+        "label": "Mail"
+      },
+      "cf": {
+        "placeholder": "Inserisci il CF",
+        "label": "CF"
       }
     },
     "side-bar": {
